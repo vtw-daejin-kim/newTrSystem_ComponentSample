@@ -1,0 +1,29 @@
+{
+    "AtrzSumry" :  
+        { "AtrzSumry1" : [
+            { "key": "prmpcInptSeCd", "value": "결재유형" },
+            { "key": "regEmpFlnm", "value": "기안자" },
+            { "key": "aprvYmd", "value": "최종승인일자" },
+            { "key": "rjctYmd", "value": "반려일자" },
+            { "key": "atrzAplyPrvonshCn", "value": "승인요청사유" },
+            { "key": "", "value": "" }
+            ],
+          "AtrzSumry2" : [
+            { "key" : "atrzStepStts", "value": "단계(상태)" },
+            { "key" : "aprvrEmpFlnm", "value": "결재자"}
+          ],
+          "AtrzSumry3" : [
+            { "key" : "atrzStepStts", "value": "단계(상태)" },
+            { "key" : "aprvrEmpFlnm", "value": "결재자"}, 
+            { "key": "atrzOpnnCn", "value": "결재의견" },
+            { "key": "", "value": "" }
+          ],
+          "AtrzSumry4" : [
+            { "key" : "atrzStepStts", "value": "단계(상태)" },
+            { "key" : "aprvrEmpFlnm", "value": "결재자"},
+            { "key": "rjctPrvonsh", "value": "반려사유" },
+            { "key": "", "value": "" }
+          ]
+        },
+    "queryId": "projectMapper.retrievePrjctAprvDtl"
+}

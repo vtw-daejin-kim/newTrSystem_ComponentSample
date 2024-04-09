@@ -1,0 +1,33 @@
+{
+"BaseInfo" :
+  [
+    { "key": "prjctNm", "value": "프로젝트 명" },
+    { "key": "prjctCdIdntfr", "value": "프로젝트 코드" },
+    { "key": "deptNm", "value": "소속" },
+    { "key": "prjctMngrEmpFlnm", "value": "PM" },
+    { "key": "prjctStleCdNm", "value": "프로젝트 형태" },
+    { "key": "bizSttsCdNm", "value": "프로젝트 상태" },
+    { "key": "expectOrderYmd", "value": "예상발주일" },
+    { "key": "beffatPbancDdlnYmd", "value": "사전공고마감" },
+    { "key": "propseDdlnYmd", "value": "제안마감일" },
+    { "key": "propsePrsntnYmd", "value": "제안PT일" },
+    { "key": "ctrtYmd", "value": "계약일" },
+    { "key": "bizEndYmd", "value": "사업종료일" },
+    { "key": "igiYmd", "value": "검수일" },
+    { "key": "stbleEndYmd", "value": "경비사용 종료일(TR입력기간)" }
+  ],
+  "PicInfo":
+  [
+    { "key": "ctmmnyNm", "value": "고객사" },
+    { "key": "picFlnm", "value": "담당자 성명" },
+    { "key": "picTelno", "value": "담당자 전화번호" },
+    { "key": "picEml", "value": "담당자 이메일" }
+  ],
+  "Cnsrtm": 
+  [
+    { "key": "cnsrtmCoNm", "value": "회사명" },
+    { "key": "bizFlfmtTyCdNm", "value": "역할" },
+    { "key": "altmntAmt", "value": "금액" },
+    { "key": "cmmnExpensAmt", "value": "공통경비" }
+  ]
+}

@@ -1,0 +1,291 @@
+/* styles.css */
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  margin: 0;
+  background-image: url("../img/login_bg.jpg"); /* 배경 이미지 경로 설정 */
+  background-size: cover;
+}
+.login-form {
+  display: flexbox;
+  width: 500px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+.slogan {
+  width: 100%;
+  height: 150px; /* Slogan 이미지의 높이 조절 */
+  margin-top: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-header {
+  margin-left: 5%;
+  margin-top: 2%;
+}
+.title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  margin-bottom: 15px;
+}
+
+.remember-me-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.login-addInfo {
+  text-align: center;
+  font-size: "20px";
+  color: white;
+}
+
+.project-regist-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popup-content {
+  height: 100%;
+  width: 100%;
+}
+
+.project-regist-content-inner {
+  width: 50%;
+}
+
+.project-change-content-inner-left {
+  width: 30%;
+}
+
+.project-change-content-inner-right {
+  width: 70%;
+}
+
+.asterisk::before { color: red; content: "*"; font-size: inherit; margin-left: 0.4rem; }
+
+/* NoticeInput.css */
+.notice-table {
+  width: 100%;
+  margin-bottom: 30px;
+  border-collapse: collapse;
+  border: 2px solid #ddd;
+}
+.notice-table th, .notice-table td {
+  border: 2px solid #ddd;
+  padding: 10px;
+}
+.input-column {
+  background-color: rgb(244, 242, 242);
+  text-align: center;
+  font-weight: bold;
+}
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+.checkbox-label {
+  flex: 0 0 auto; /* 너비 자동으로 설정 */
+  margin-right: 10px; /* 오른쪽 마진 추가 */
+}
+.checkSpace{
+  margin-right: 10px;
+}
+.inputFormBtn{
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+
+.atrz-container {
+  position: relative;
+}
+
+.atrz-container,
+.left-content {
+  min-height: 530px;
+}
+
+.left-content {
+  display: inline-block;
+  width: 180px;
+  padding: 0 10px 10px;
+  /* background-color: rgba(191, 191, 191, 0.15); */
+  /* box-shadow: -5px 0 14px -8px rgba(0, 0, 0, 0.25) inset; */
+}
+
+.right-content {
+  position: absolute;
+  right: 0;
+  left: 220px;
+  top: 0;
+  height: 100%;
+}
+
+.title-aprvDetail-container {
+  position: relative;
+  margin-bottom: "10px"; 
+  min-height: 220px;
+}
+
+.title-aprvDetail {
+  text-align: left;
+  /* font-size: 20px; */
+  margin-bottom: 20px;
+}
+
+.title-aprvDetail-left {
+  display: inline-block;
+  width: 300px;
+  min-height: 220px;
+}
+
+.title-aprvDetail-right {
+  position: absolute;
+  right: 0;
+  left: 70%;
+  top: 0;
+  width: 400px;
+  height: 100%;
+  display: flex;
+}
+
+.table-atrzLn-wrapper {
+  flex: 1;
+}
+
+.table-atrzLn {
+  border: 1px solid #ddd;
+  margin-left: auto;
+  text-align: center;
+  font-size: 14px;
+}
+
+.table-atrzLn-th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
+.table-atrzLn-td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100px;
+  height: 40px
+}
+
+.dx-widget.dx-button.dx-button-mode-text.dx-button-normal.dx-button-has-text.dx-button-has-icon.dx-datagrid-export-button {
+  box-shadow: 0 1px 3px rgba(0,0,0,.24);
+  border-radius: 5px;
+  width: 120px;
+  height: 40px;
+  color: rgba(0, 0, 0, .87);
+  cursor: pointer;
+}
+
+.dx-icon-xlsxfile:before{
+  content: "엑셀 다운로드" !important;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  font-family: Roboto, RobotoFallback, "Noto Kufi Arabic", Helvetica, Arial, sans-serif;
+}
+
+.elecAtrz-from-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.elecAtrz-from-container-box {
+  width: 23%;
+  margin: 10px;
+}
+
+.elecAtrzNewReq-ctrtInfo > .dx-fieldset > .dx-field > .dx-field-label{
+  text-align: center;
+  width: 20%
+}
+
+.elecAtrzNewReq-ctrtInfo > .dx-fieldset > .dx-field > .dx-field-value{
+  width: 50%
+}
+
+.elecAtrzNewReq-ctrtInfo > .dx-fieldset > .dx-field > .dx-field-value > .dx-field-value-text{
+  padding: 9px 0px 9px 0px;
+  font-size: 16px;
+}
+
+
+
+
+.atrz-popup-header {
+  display: flex;
+  background-color: #d8dbde; 
+  padding: 10px 0; 
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.atrz-popup-row {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0;
+}
+
+.atrz-popup-cell:nth-child(1) {
+  text-align: center;
+  flex: 0 0 15%;
+  padding: 5px 0;
+}
+
+.atrz-popup-cell:nth-child(2) {
+  text-align: center;
+  flex: 0 0 30%;
+  padding: 5px 0;
+}
+
+.atrz-popup-cell:nth-child(3) {
+  text-align: center;
+  flex: 0 0 55%;
+  padding: 5px 0;
+  display: flex;
+}
+
+.aprvrEmp {
+  margin-right: 10px;
+}
+
+/* 추가 버튼 스타일 */
+.atrz-popup-button {
+  border: 1px solid #e8e6e6;
+  background-color: #e4f4fc;
+  padding: 10px 0; 
+  cursor: pointer;
+}
+
+.popup-delete-btn {
+  background-color: transparent;
+  color: red;
+  border: none;
+  cursor: pointer; 
+  padding: 0;
+  margin-left: 10px;
+}

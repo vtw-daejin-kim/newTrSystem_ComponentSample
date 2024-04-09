@@ -1,0 +1,37 @@
+[
+  {
+    "TabName": "종합집계",
+    "tabId": "ProjectList",
+    "url": "pages/project/manage/ProjectTotCostInfo"
+  },
+  {
+    "TabName": "자사인건비",
+    "tabId": "ProjectEmpCostSearch",
+    "url": "pages/project/manage/ProjectEmpCostSearch"
+  },
+  {
+    "TabName": "외주인건비",
+    "tabId": "ProjectOutordEmpCostSearch",
+    "url": "pages/project/manage/ProjectOutordEmpCostSearch"
+  },
+  {
+    "TabName": "외주업체비",
+    "tabId": "ProjectOutordCompanyCostSearch",
+    "url": "pages/project/manage/ProjectOutordCompanyCostSearch"
+  },
+  {
+    "TabName": "통제성경비",
+    "tabId": "ProjectControlBudgetCostSearch",
+    "url": "pages/project/manage/ProjectControlBudgetCostSearch"
+  },
+  {
+    "TabName": "일반경비",
+    "tabId": "ProjectGeneralBudgetCostSearch",
+    "url": "pages/project/manage/ProjectGeneralBudgetCostSearch"
+  },
+  {
+    "TabName": "재료비",
+    "tabId": "MatalCost",
+    "url": "pages/project/manage/MatalCost"
+  }
+]
