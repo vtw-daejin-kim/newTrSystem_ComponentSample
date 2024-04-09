@@ -10,10 +10,12 @@ export const navigation = [
     items: [
       {
         text: 'CustomTable Sample',
-        path: 'sample/CustomTableSample'
+        path: 'sample/ComponentSampleList'
       }
     ]
-  }, {
+  }
+  /*
+  , {
     text: '정보조회',
     icon: 'info',
     items: [
@@ -185,5 +187,5 @@ export const navigation = [
         path: '/76'
       },
     ]
-  }
+  }*/
   ];
