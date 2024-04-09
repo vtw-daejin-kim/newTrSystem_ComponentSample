@@ -304,6 +304,12 @@ const routes = [
       name: "MeetingRoomReserv",
       element: React.lazy(() => import("../../pages/infoInq/MeetingRoomReserv")),
     },
+    //샘플 소스 > 커스텀테이블 샘플
+  {
+    path: "/sample/CustomTableSample",
+    name: "CustomTableSample",
+    element: React.lazy(() => import("../../pages/sample/CustomTableSample")),
+  }
 ];
 
 export default routes.map(route => {

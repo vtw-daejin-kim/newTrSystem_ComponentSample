@@ -5,6 +5,15 @@ export const navigation = [
     icon: 'home'
   },
   {
+    text: 'Sample',
+    icon: 'info',
+    items: [
+      {
+        text: 'CustomTable Sample',
+        path: 'sample/CustomTableSample'
+      }
+    ]
+  }, {
     text: '정보조회',
     icon: 'info',
     items: [
