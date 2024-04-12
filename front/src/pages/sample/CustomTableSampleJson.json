@@ -1,0 +1,39 @@
+{
+    "queryId" : "ComponentSampleMapper.retrieveSampleBoardList",
+    "sampleInsertPage" : "/sample/BoardInputFormSample",
+    "keyColumn" : "boardId",
+    "tableColumns": 
+	[
+        { "key": "rownum", "value": "번호", "width": "120", "alignment" : "center" },
+        { "key": "boardTtl", "value": "게시글 제목", "alignment" : "center" },
+        { "key": "empFlnm", "value": "올린사람", "width": "120", "alignment" : "center"  },
+        { "key": "regDt", "value": "등록일시", "width": "120" },
+        { "key": "Button01", "value": "수정", "width": "120", "alignment" : "center", "button" : {"name" : "Button01", "text" : "수정", "able" : "true"} }
+	],
+    "searchInfo": {
+        "searchParams": { 
+            "insertButton": true,
+            "dateRange": true,
+            "startDtNm": "startDt",
+            "endDtNm": "endDt"
+        },
+        "selectBoxItem": [
+          {
+            "placeholder": "[전체]",
+            "param":{
+              "tbNm": "CD",
+              "valueExpr": "cdValue",
+              "displayExpr": "cdNm",
+              "name": "searchCnd",
+              "condition": {
+                "upCdValue": "VTW017"
+              },
+              "clearButton": true
+            }
+          }
+        ],
+        "textBoxItem": [
+          { "placeholder": "검색어", "name": "searchWrd" }
+        ]
+    }
+}

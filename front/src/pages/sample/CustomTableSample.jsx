@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CustomTable from "components/unit/CustomTable";
-import ComponentSampleListJson from "./ComponentSampleJson.json";
+import CustomTableSampleJson from "./CustomTableSampleJson.json";
 import SearchInfoSet from "components/composite/SearchInfoSet";
 import { useNavigate } from "react-router-dom";
 import ApiRequest from "utils/ApiRequest";
@@ -9,7 +9,7 @@ import { exportDataGrid } from "devextreme/excel_exporter";
 import { saveAs } from "file-saver-es";
 
 const CustomTableSample = () => {
-    const { keyColumn, queryId, tableColumns, searchInfo, sampleInsertPage } = ComponentSampleListJson;
+    const { keyColumn, queryId, tableColumns, searchInfo, sampleInsertPage } = CustomTableSampleJson;
 
     const navigate = useNavigate();
     const [param, setParam] = useState({queryId : queryId});

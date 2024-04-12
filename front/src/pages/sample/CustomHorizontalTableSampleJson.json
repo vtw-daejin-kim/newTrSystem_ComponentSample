@@ -11,7 +11,7 @@
     ],
     "detailButtonGroup" : [
         { "id": 1, "text": "목록", "onClick": "/sample/CustomTableSample", "type": "normal" },
-        { "id": 2, "text": "수정", "onClick": "/sample/ComponentSampleInput", "state": { "id": "boardId", "editMode": "update" }, "type":"default" },
+        { "id": 2, "text": "수정", "onClick": "/sample/BoardInputFormSample", "state": { "id": "boardId", "editMode": "update" }, "type":"default" },
         { "id": 3, "text": "삭제", "onClick": "deleteBoard", "type":"danger" }
     ]
 }

@@ -26,14 +26,8 @@
 			OR REGEXP_REPLACE(A.BOARD_CN, '&lt;[^&gt;]*&gt;', '') LIKE CONCAT('%', #{searchWrd}, '%')
 			)
 		  </if>
-		  <if test="startDt != null and endDt == null">
-		  	AND A.REG_DT >= STR_TO_DATE(#{startDt}, '%Y%m%d%H%i%s')
-		  </if>
-		  <if test="startDt == null and endDt != null">
-		  	AND A.REG_DT &lt;= STR_TO_DATE(#{endDt}, '%Y%m%d%H%i%s')
-		  </if>
 		  <if test="startDt != null and endDt != null">
-		  	AND A.REG_DT BETWEEN STR_TO_DATE(#{startDt}, '%Y%m%d%H%i%s') AND STR_TO_DATE(#{endDt}, '%Y%m%d%H%i%s')
+		  	AND A.REG_DT BETWEEN CONCAT(DATE(#{startDt}), ' ', '00:00:00') AND CONCAT(DATE(#{startDt}), ' ', '23:59:59')
 		  </if>
 		  ORDER BY DT
 	</select>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom"
 import CustomHorizontalTable from "components/unit/CustomHorizontalTable";
-import ComponentHorizontalDetailSampleJson from "./CustomHorizontalTableSampleJson.json";
+import CustomHorizontalTableSampleJson from "./CustomHorizontalTableSampleJson.json";
 import { Button } from "devextreme-react";
 import ApiRequest from 'utils/ApiRequest';
 const CustomHorizontalTableSample = () => {
@@ -10,7 +10,7 @@ const CustomHorizontalTableSample = () => {
     const location = useLocation();
     const boardId = location.state.id;
     const [ boardDetailData, setBoardDetailData ] = useState({});
-    const { queryId, boardDetail, detailButtonGroup} = ComponentHorizontalDetailSampleJson;
+    const { queryId, boardDetail, detailButtonGroup} = CustomHorizontalTableSampleJson;
     
     
     useEffect(() => {

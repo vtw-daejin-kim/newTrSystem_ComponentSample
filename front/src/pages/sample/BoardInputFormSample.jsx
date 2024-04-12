@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { Button } from "devextreme-react";
-import ComponentSampleJson from "./ComponentSampleJson.json";
+import BoardInputFormSampleJson from "./BoardInputFormSampleJson.json";
 import BoardInputForm from "components/composite/BoardInputForm";
 import uuid from "react-uuid";
 import moment from 'moment';
@@ -21,7 +21,7 @@ const BoardInputFormSample = () => {
     const empId = cookies.userInfo.empId;
     const date = moment();
 
-    const { edit, detail , atchmnflQueryId} = ComponentSampleJson;
+    const { edit, queryId } = BoardInputFormSampleJson;
 
     //등록 첨부파일
     const [atchmnFl, setAtchmnFl] = useState([]);
@@ -41,7 +41,7 @@ const BoardInputFormSample = () => {
 
     const selectData = async() => {
         const param = {
-            queryId : detail.selectOneQueryId,
+            queryId : queryId,
             boardId : boardId
         }
 
@@ -62,13 +62,7 @@ const BoardInputFormSample = () => {
 
     const onClick = () => {
         const result = window.confirm("등록하시겠습니까?");
-        if (result) {
-            saveData();
-        }
-    }
-
-    const attachFileDelete = (deleteItem) => {
-
+        if (result) saveData();
     }
 
     const saveData = async () => {
@@ -86,7 +80,6 @@ const BoardInputFormSample = () => {
 
         if(editMode === 'update') {
             saveData = {...saveData, "mdfcnEmpId" : empId, "mdfcnDt" : date.format('YYYY-MM-DD HH:mm:ss')}
-            console.log("update data : ", saveData);
             formData.append("idColumn", JSON.stringify({boardId : data.boardId}));
             formData.append("deleteFiles", JSON.stringify(deleteFiles));
         } 
@@ -112,21 +105,18 @@ const BoardInputFormSample = () => {
         <div className="container">
             <div className="title p-1" style={{ marginTop: "20px", marginBottom: "10px" }}></div>
             <div className="col-md-10 mx-auto" style={{ marginBottom: "30px" }}>
-                <h1 style={{ fontSize: "40px" }}>Component Sample Board Insert</h1>
+                <h1 style={{ fontSize: "40px" }}>BoardInputForm Sample</h1>
             </div>
             <BoardInputForm
                 edit={edit}
                 data={data}
-                //typeChk={typeChk}
                 editMode={editMode}
-                //editType='notice'
                 attachments={atchmnFl}
                 setAttachments={setAtchmnFl}
                 newAttachments={newAtchmnFl}
                 setNewAttachments={setNewAtchmnFl}
                 setData={setData}
-                //setTypeChk={setTypeChk}
-                attachFileDelete={attachFileDelete}
+                //attachFileDelete={attachFileDelete}
             />
             <div className="wrap_btns inputFormBtn">
                 <Button text="목록" onClick={() => navigate("/sample/CustomTableSample")} />

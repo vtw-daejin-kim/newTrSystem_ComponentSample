@@ -1,0 +1,10 @@
+{
+    "queryId" : "ComponentSampleMapper.retrieveSampleBoardOne",
+    "edit" : {
+        "columns": [
+            { "dataField" : "noticeTtl", "name" : "ttl", "label" : "제목", "placeholder" : "제목을 입력하세요" },
+            { "dataField" : "noticeCn", "name" : "cn", "label" : "내용", "placeholder" : "내용을 입력하세요" },
+            { "dataField" : "uploadFile", "label": "첨부파일" }
+        ]
+    } 
+}
