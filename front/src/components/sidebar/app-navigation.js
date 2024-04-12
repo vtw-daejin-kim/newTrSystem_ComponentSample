@@ -10,11 +10,10 @@ export const navigation = [
     items: [
       {
         text: 'CustomTable Sample',
-        path: 'sample/ComponentSampleList'
+        path: 'sample/CustomTableSample'
       }
     ]
   }
-  /*
   , {
     text: '정보조회',
     icon: 'info',
@@ -41,7 +40,8 @@ export const navigation = [
       },
       
     ]
-  }, {
+  }
+  , {
     text: '개인청구',
     icon: 'money',
     items: [
@@ -187,5 +187,5 @@ export const navigation = [
         path: '/76'
       },
     ]
-  }*/
+  }
   ];

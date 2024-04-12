@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.trsystem.mybatis.mapper.ComponentSampleMapper">
+	<select id="retrieveSampleBoardList" parameterType="map" resultType="com.trsystem.LowerHashMap">
+		SELECT ROW_NUMBER() OVER () ROWNUM
+		     , A.BOARD_ID
+     		 , A.BOARD_TTL
+     		 , A.BOARD_CN
+     		 , A.REG_EMP_ID
+     		 , B.EMP_FLNM
+     		 , A.REG_DT AS DT
+     		 , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
+     		 , COUNT(*) OVER () AS TOTAL_ITEMS
+          FROM tester.SAMPLE_BOARD A
+          INNER JOIN tester.EMP B ON A.REG_EMP_ID = B.EMP_ID
+          WHERE 1=1
+          <if test="searchCnd == 'VTW01701' and searchWrd != null">
+            AND A.BOARD_TTL LIKE CONCAT('%',#{searchWrd},'%')
+          </if>
+          <if test="searchCnd == 'VTW01702' and searchWrd != null">
+			AND REGEXP_REPLACE(A.BOARD_CN, '&lt;[^&gt;]*&gt;', '') LIKE CONCAT('%', #{searchWrd}, '%')
+		  </if>
+		  <if test="(searchCnd == null and searchWrd != null) or (searchCnd == 'VTW01703' and searchWrd != null)">
+		  	AND (
+			A.BOARD_TTL LIKE CONCAT('%',#{searchWrd},'%')
+			OR REGEXP_REPLACE(A.BOARD_CN, '&lt;[^&gt;]*&gt;', '') LIKE CONCAT('%', #{searchWrd}, '%')
+			)
+		  </if>
+		  <if test="startDt != null and endDt == null">
+		  	AND A.REG_DT >= STR_TO_DATE(#{startDt}, '%Y%m%d%H%i%s')
+		  </if>
+		  <if test="startDt == null and endDt != null">
+		  	AND A.REG_DT &lt;= STR_TO_DATE(#{endDt}, '%Y%m%d%H%i%s')
+		  </if>
+		  <if test="startDt != null and endDt != null">
+		  	AND A.REG_DT BETWEEN STR_TO_DATE(#{startDt}, '%Y%m%d%H%i%s') AND STR_TO_DATE(#{endDt}, '%Y%m%d%H%i%s')
+		  </if>
+		  ORDER BY DT
+	</select>
+	
+	<select id="retrieveSampleBoardOne" parameterType="map" resultType="com.trsystem.LowerHashMap"> 
+        SELECT A.BOARD_ID
+     		 , A.BOARD_TTL
+     		 , A.BOARD_CN
+     		 , A.REG_EMP_ID
+     		 , B.EMP_FLNM
+     		 , A.REG_DT AS DT
+     		 , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
+     		 , A.ATCHMNFL_ID
+     		 , C.ATCHMNFL_SN 
+     		 , C.STRG_FILE_NM 
+     		 , C.REAL_FILE_NM
+     		 , C.FILE_STRG_COURS 
+          FROM tester.SAMPLE_BOARD A
+          INNER JOIN tester.EMP B ON A.REG_EMP_ID = B.EMP_ID
+          LEFT JOIN tester.ATCHMNFL C ON A.ATCHMNFL_ID = C.ATCHMNFL_ID 
+          WHERE 1=1
+            AND A.BOARD_ID = #{boardId} 
+	</select>
+</mapper>

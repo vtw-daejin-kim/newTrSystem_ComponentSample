@@ -268,7 +268,7 @@ const routes = [
     name: "ElecAtrz",
     element: React.lazy(() => import("../../pages/elecAtrz/ElecAtrz")),
   },
-  // 전자결재 신규기안 작성 
+  // 전자결재 신규기안 작성 7
   {
     path: "/elecAtrz/ElecAtrzNewReq",
     name: "ElecAtrzNewReq",
@@ -293,22 +293,52 @@ const routes = [
     },
 
        // 재무 관리 > 문화체련비 관리 > 문화체련비 관리 마감 목록
-   {
+  {
     path: "/fnnrMng/EmpCultHealthCostManageDeadLine",
     name: "EmpCultHealthCostManageDeadLine",
     element: React.lazy(() => import("../../pages/fnnrMng/EmpCultHealthCostManageDeadLine")),
   },
-    // 회의실 예약
-    {
-      path: "/infoInq/MeetingRoomReserv",
-      name: "MeetingRoomReserv",
-      element: React.lazy(() => import("../../pages/infoInq/MeetingRoomReserv")),
-    },
-    //샘플 소스 > 커스텀테이블 샘플
+  // 회의실 예약
   {
-    path: "/sample/ComponentSampleList",
-    name: "ComponentSampleList",
-    element: React.lazy(() => import("../../pages/sample/ComponentSampleList")),
+    path: "/infoInq/MeetingRoomReserv",
+    name: "MeetingRoomReserv",
+    element: React.lazy(() => import("../../pages/infoInq/MeetingRoomReserv")),
+  },
+    //샘플 소스 > 샘플 게시판
+  {
+    path: "/sample/CustomTableSample",
+    name: "CustomTableSample",
+    element: React.lazy(() => import("../../pages/sample/CustomTableSample")),
+  },
+  // 샘플게시판 상세
+  {
+    path: "/sample/ComponentSampleDetail",
+    name: "ComponentSampleDetail",
+    element: React.lazy(() => import("../../pages/sample/ComponentSampleDetail"))
+  },
+  // 샘플게시판 상세 (CustomHorizontalTable)
+  {
+    path: "/sample/CustomHorizontalTableSample",
+    name: "CustomHorizontalTableSample",
+    element: React.lazy(() => import("../../pages/sample/CustomHorizontalTableSample"))
+  },
+  // 샘플 게시글 등록
+  {
+    path: "/sample/BoardInputFormSample",
+    name: "BoardInputFormSample",
+    element: React.lazy(() => import("../../pages/sample/BoardInputFormSample"))
+  },
+  //컴포넌트 샘플 소스 인서트 보드
+  {
+    path: "/sample/ComponenetSampleInsert",
+    name: "ComponenetSampleInsert",
+    element: React.lazy(() => import("../../pages/sample/ComponenetSampleInsert"))
+  },
+  //CustomEditTable 샘플 
+  {
+    path: "/sample/CustomEditTableSample",
+    name: "CustomEditTableSample",
+    element: React.lazy(() => import("../../pages/sample/CustomEditTableSample"))
   }
 ];
 
