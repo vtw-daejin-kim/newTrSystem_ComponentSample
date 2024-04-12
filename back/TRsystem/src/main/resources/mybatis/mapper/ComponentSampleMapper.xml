@@ -29,7 +29,7 @@
 		  <if test="startDt != null and endDt != null">
 		  	AND A.REG_DT BETWEEN CONCAT(DATE(#{startDt}), ' ', '00:00:00') AND CONCAT(DATE(#{startDt}), ' ', '23:59:59')
 		  </if>
-		  ORDER BY DT
+		  ORDER BY DT DESC
 	</select>
 	
 	<select id="retrieveSampleBoardOne" parameterType="map" resultType="com.trsystem.LowerHashMap"> 
