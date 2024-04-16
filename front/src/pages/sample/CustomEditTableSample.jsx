@@ -3,6 +3,7 @@ import CustomEditTableSampleJson from "./CustomEditTableSampleJson.json";
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import ApiRequest from "utils/ApiRequest";
+import uuid from "react-uuid";
 
 const CustomEditTableSample = () => {
     const [boardData, setBoardData]  = useState([]);
@@ -14,10 +15,13 @@ const CustomEditTableSample = () => {
     const [ values, setValues] = useState([]);
     const { queryId, keyColumn, tableColumns, tbNm } = CustomEditTableSampleJson
 
+    const doublePk =  {nm : "boardId", val : uuid()}
+
     useEffect(() => {
         pageHandle();
     }, []);
 
+    
     const pageHandle = async () => {
         const param = {
             queryId : queryId
@@ -48,6 +52,7 @@ const CustomEditTableSample = () => {
                     values={values}
                     keyColumn={keyColumn}
                     columns={tableColumns}
+                    doublePk={doublePk}
                     callback={pageHandle}
                 />
       </div>
