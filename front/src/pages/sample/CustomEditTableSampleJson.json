@@ -1,0 +1,5 @@
+{
+    "menuName" : "CustomEditTableSample",
+    "queryId" : "ComponentSampleMapper.retrieveSampleBoardList",
+    "keyColumn" : "boardId"
+}
