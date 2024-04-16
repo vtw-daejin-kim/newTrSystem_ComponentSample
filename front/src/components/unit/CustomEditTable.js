@@ -11,7 +11,8 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
 
     const [ cookies ] = useCookies(["userInfo", "userAuth"]);
     const [ cdValList, setCdValList ] = useState({});
-    const empId = cookies.userInfo.empId;
+    const empId = "75034125-f287-11ee-9b25-000c2956283f";
+    //const empId = cookies.userInfo.empId;
     const date = moment();
 
     useEffect(() => { getCdVal(); }, []);
