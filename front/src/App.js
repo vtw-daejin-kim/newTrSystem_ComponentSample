@@ -77,7 +77,6 @@ import { AuthProvider, useAuth } from './components/sidebar/contexts/auth';
 import { useScreenSizeClass } from './components/sidebar/utils/media-query';
 import Content from './components/sidebar/Content';
 import { Suspense, useState, useEffect, useTransition } from "react";
-import LoginForm from "./pages/login/LoginFrom.jsx";
 import { CookiesProvider } from "react-cookie";
 import {locale} from 'devextreme/localization';
 
@@ -94,6 +93,7 @@ function App() {
 
       const [isPending,startTransition] = useTransition();
 
+      /*
       const [isLoggedIn, setLoggedIn] = useState(() => {
         const storedLoginStatus = localStorage.getItem("isLoggedIn"); //sessionStorage
         return storedLoginStatus ? JSON.parse(storedLoginStatus) : false;
@@ -103,16 +103,18 @@ function App() {
       useEffect(() => {
         localStorage.setItem("isLoggedIn", JSON.stringify(isLoggedIn));
       }, [localStorage]);
-
+      */
+     const isLoggedIn = true;
       // const loading = (
       //   <div style={{ backgroundColor: "white", height: "1000px" }}> <LoadPanel visible={true} />;</div>
       // );
     
+      /*
       const handleLogin = (isOk) => {
         console.log(isOk)
         setLoggedIn(isOk);
       };
-
+      */
       const { user, loading } = useAuth();
 
       if (loading) {
@@ -138,13 +140,16 @@ function App() {
               </CookiesProvider>
             </Router>
           );
-        } else {
+        } 
+        /*
+        else {
           return (
             <Router>
               <LoginForm handleLogin={handleLogin} />;
             </Router>
           );
         }
+        */
       };
 
       return (

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useLocation } from "react-router-dom";
-import { useCookies } from "react-cookie";
 import { Button } from "devextreme-react";
 import BoardInputFormSampleJson from "./BoardInputFormSampleJson.json";
 import BoardInputForm from "components/composite/BoardInputForm";
@@ -13,12 +12,11 @@ import ApiRequest from "utils/ApiRequest";
 const BoardInputFormSample = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [cookies] = useCookies(["userInfo", "userAuth"]);
 
     const editMode = location.state.editMode;
     const boardId = location.state.boardId;
 
-    const empId = cookies.userInfo.empId;
+    const empId = "75034125-f287-11ee-9b25-000c2956283f";
     const date = moment();
 
     const { edit, queryId } = BoardInputFormSampleJson;
@@ -47,7 +45,7 @@ const BoardInputFormSample = () => {
 
         try{
             const response = await ApiRequest("/boot/common/queryIdSearch", param);
-            console.log('response', response);
+            console.log('response : ', response);
             if(response !== 0) {
                 response[0] = {
                     "noticeTtl" : response[0].boardTtl,
@@ -67,7 +65,7 @@ const BoardInputFormSample = () => {
 
     const saveData = async () => {
         const formData = new FormData();
-        //BoardInputForm 에서 notice랑 reference 둘만 가능하게 설정되어있으므로 값 재설정 해줌
+        //BoardInputForm 에서 notice(공지사항)과 reference(자료실) 둘만 가능하게 설정되어있으므로 값 재설정 해줌
         let saveData = {
             ...data,
             "boardTtl" : data.noticeTtl,

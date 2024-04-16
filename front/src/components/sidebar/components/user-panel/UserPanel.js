@@ -8,9 +8,11 @@ import {signOut} from "../../../../utils/AuthMng"
 
 export default function UserPanel({ menuMode }) {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["userInfo", "userAuth"]);
-  const empno = cookies.userInfo.empno;
-  const empNm = cookies.userInfo.empNm;
+  //const [cookies, setCookie] = useCookies(["userInfo", "userAuth"]);
+  const empno = "75034125-f287-11ee-9b25-000c2956283f";
+  const empNm = "김진규";
+  //const empno = cookies.userInfo.empno;
+  //const empNm = cookies.userInfo.empNm;
   
   const navigateToProfile = useCallback(() => {
     navigate("/infoInq/empDetailInfo");
