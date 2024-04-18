@@ -1,6 +1,7 @@
 import DataGrid, { Column } from 'devextreme-react/data-grid';
 
 const CustomHorizontalTable = ({ headers, column }) => { 
+
   const data = headers.reduce((result, header, index) => {
     // 홀수 인덱스일 때만 새로운 로우 생성
     //4열 [Header, Column, Header, Column] 구조
@@ -8,13 +9,21 @@ const CustomHorizontalTable = ({ headers, column }) => {
       result.push({
         header: header.value,
         column : column?.[header.key] ?? "",
+        cellType : header.cellType ?? "",
         header1: headers[index + 1]?.value,
         column1 : column?.[headers[index + 1]?.key] ?? "",
+        cellType1 : headers[index + 1]?.cellType ?? ""
       });
     }
     return result;
   }, []);
 
+  const htmlRender = (e) => {
+      return (
+        <div dangerouslySetInnerHTML={{ __html: e }}/>
+    );
+  }
+  
   return (
     <DataGrid
       key={headers.value}
@@ -61,9 +70,23 @@ const CustomHorizontalTable = ({ headers, column }) => {
       }}   
     >
       <Column dataField="header" caption="Header" alignment="center" />
-      <Column dataField="column" caption="Column" alignment="center" />
+      <Column 
+        dataField="column"
+        caption="Column"
+        alignment="center"
+        cellRender={(row) => 
+          row.data.cellType === "html" ? htmlRender(row.data.column) : <span>{row.data.column}</span>
+        } 
+      />
       <Column dataField="header1" caption="Header1" alignment="center" />
-      <Column dataField="column1" caption="Column1" alignment='center' />
+      <Column 
+        dataField="column1" 
+        caption="Column1" 
+        alignment="center"
+        cellRender={(row) => 
+          row.data.cellType1 === "html" ? htmlRender(row.data.column1) : <span>{row.data.column1}</span>
+        } 
+      />
     </DataGrid>
   );
 };

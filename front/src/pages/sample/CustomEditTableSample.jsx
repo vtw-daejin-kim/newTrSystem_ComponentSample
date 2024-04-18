@@ -15,8 +15,6 @@ const CustomEditTableSample = () => {
     const [ values, setValues] = useState([]);
     const { queryId, keyColumn, tableColumns, tbNm } = CustomEditTableSampleJson
 
-    const doublePk =  {nm : "boardId", val : uuid()}
-
     useEffect(() => {
         pageHandle();
     }, []);
@@ -52,8 +50,8 @@ const CustomEditTableSample = () => {
                     values={values}
                     keyColumn={keyColumn}
                     columns={tableColumns}
-                    doublePk={doublePk}
                     callback={pageHandle}
+                    paging={true}
                 />
       </div>
     )
