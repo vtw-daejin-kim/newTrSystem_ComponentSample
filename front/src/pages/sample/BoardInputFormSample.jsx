@@ -9,7 +9,13 @@ import moment from 'moment';
 import axios from "axios";
 import ApiRequest from "utils/ApiRequest";
 
+//====================================
+//  BoardInputForm 샘플 소스
+//  게시글을 입력하기 위한 form 
+//  현재 BoardInputForm 해당 컴포넌트는 공지사항과 자료실 전용으로 만들어져있는 상태
+//====================================
 const BoardInputFormSample = () => {
+    //=======================선언구간============================//
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -25,18 +31,22 @@ const BoardInputFormSample = () => {
     const [atchmnFl, setAtchmnFl] = useState([]);
     //수정시에 기존 파일을 보여주기 위한 객체
     const [newAtchmnFl, setNewAtchmnFl] = useState([]); 
-    //수정시에 첨푸파일 개별삭제에 필요한 함수
+    //수정시에 첨부파일 개별삭제에 필요한 함수
     const [deleteFiles, setDeleteFiles] = useState([{}]);
+    
     const [ data, setData ] = useState({
         boardId : uuid(),
         regEmpId: empId, 
         regDt : date.format('YYYY-MM-DD HH:mm:ss')
     });
+    //===========================================================//
 
+    //수정 시에 데이터 불러오는 useEffect
     useEffect(() => {
         if(editMode === 'update') selectData();
     }, []);
 
+    //수정 시 데이터 조회 함수
     const selectData = async() => {
         const param = {
             queryId : queryId,
@@ -58,11 +68,13 @@ const BoardInputFormSample = () => {
         }
     }
 
+    //저장 버튼 클릭 이벤트 함수
     const onClick = () => {
         const result = window.confirm("등록하시겠습니까?");
         if (result) saveData();
     }
 
+    //저장 함수
     const saveData = async () => {
         const formData = new FormData();
         //BoardInputForm 에서 notice(공지사항)과 reference(자료실) 둘만 가능하게 설정되어있으므로 값 재설정 해줌

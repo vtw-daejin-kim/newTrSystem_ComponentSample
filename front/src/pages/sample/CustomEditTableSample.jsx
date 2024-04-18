@@ -5,16 +5,21 @@ import { useCookies } from "react-cookie";
 import ApiRequest from "utils/ApiRequest";
 import uuid from "react-uuid";
 
+//====================================
+//  CustomEditTable  샘플 소스 
+//  편집용 목록테이블 데이터 row의 입력, 수정, 삭제가 모두 가능한 테이블로 입력폼으로 등록과 수정이 가능
+//====================================
 const CustomEditTableSample = () => {
+    //=======================선언구간============================//
     const [boardData, setBoardData]  = useState([]);
 
     const [ cookies ] = useCookies(["userInfo", "userAuth"]);
     const [ cdValList, setCdValList ] = useState({});
-    const empId = "75034125-f287-11ee-9b25-000c2956283f";
+    const empId = "75034125-f287-11ee-9b25-000c2956283f"; 
 
     const [ values, setValues] = useState([]);
     const { queryId, keyColumn, tableColumns, tbNm } = CustomEditTableSampleJson
-
+    //==========================================================//
     useEffect(() => {
         pageHandle();
     }, []);

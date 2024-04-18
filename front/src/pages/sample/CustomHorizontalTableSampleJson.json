@@ -6,7 +6,8 @@
         { "key" : "", "value" : "" },
         { "key" : "empFlnm", "value" : "작성자" },
         { "key" : "regDt", "value" : "등록일시" },
-        { "key" : "boardCn", "value" : "내용", "cellType" : "html"}
+        { "key" : "boardCn", "value" : "내용", "cellType" : "html"},
+        { "key" : "", "value" : ""}
     ],
     "detailButtonGroup" : [
         { "id": 1, "text": "목록", "onClick": "/sample/CustomTableSample", "type": "normal" },

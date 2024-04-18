@@ -5,7 +5,7 @@
     "tableColumns" : [
         {"key" : "boardTtl", "value" : "제목", "isRequire" : true},
         {"key" : "regDt", "value" : "작성일자", "isRequire" : true, "type" : "date"},
-        {"key" : "boardCn", "value" : "게시글 내용"}
+        {"key" : "boardCn", "value" : "게시글 내용", "cellType" : "html"}
     ],
     "tbNm": "SAMPLE_BOARD"
 }

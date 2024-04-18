@@ -8,7 +8,12 @@ import { Workbook } from "exceljs";
 import { exportDataGrid } from "devextreme/excel_exporter";
 import { saveAs } from "file-saver-es";
 
+//====================================
+//  CustomTableSample 샘플 소스
+//  그리드 형식의 기본 조회용 테이블 
+//====================================
 const CustomTableSample = () => {
+    //=======================선언구간============================//
     const { keyColumn, queryId, tableColumns, searchInfo, sampleInsertPage } = CustomTableSampleJson;
 
     const navigate = useNavigate();
@@ -24,7 +29,9 @@ const CustomTableSample = () => {
     useEffect(() => {
         pageHandle();
     }, [param]);
+    //==========================================================//
 
+    //목록 조회 함수
     const pageHandle = async() => {
         try {
             const response = await ApiRequest("/boot/common/queryIdSearch", param)
@@ -51,7 +58,7 @@ const CustomTableSample = () => {
         });
     }
     
-    //로우 더블클릭
+    //로우 더블클릭 이벤트
     const onRowDblClick = (data) => {
         navigate("/sample/CustomHorizontalTableSample", {state: {id:data.key}})
     }
@@ -94,16 +101,17 @@ const CustomTableSample = () => {
 
             <div>검색된 건 수 : {totalItems} 건</div>
                 <CustomTable
-                    keyColumn={keyColumn}
-                    pageSize={pageSize}
-                    columns={tableColumns}
-                    values={values}
-                    onRowDblClick={onRowDblClick}
-                    paging={true}
-                    onClick={onClick}
-                    wordWrap={true}
-                    excel={true}
-                    onExcel={onExporting}
+                    keyColumn={keyColumn}           //조회해오는 데이터의 기준 컬럼
+                    pageSize={pageSize}             //페이징 시 로우 개수            
+                    columns={tableColumns}          //테이블 헤더에 해당하는 컬럼항목들 배열
+                    values={values}                 //DataGrid 테이블에 표출 되는 값
+                    onRowDblClick={onRowDblClick}   //row 더블클릭 이벤트
+                    //onRowClick = {onRowDblClick}  //row 클릭 이벤트 (버튼 onClick 이벤트와 같이 사용X)
+                    paging={true}                   //페이징 여부
+                    onClick={onClick}               //버튼 렌더링으로 생성된 버튼을 클릭 시 호출되는 함수
+                    wordWrap={true}                 //DataGrid의 wordWrapEnabled 속성(컬럼의 Width보다 데이터가 길 경우 자동으로 줄바꿈) 사용 여부
+                    excel={true}                    //엑셀 다운로드 사용여부         
+                    onExcel={onExporting}           //엑셀 다운로드 이벤트 함수
                 />
       </div>
     );

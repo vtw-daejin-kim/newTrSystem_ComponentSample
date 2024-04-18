@@ -5,10 +5,8 @@ import SelectBox from "devextreme-react/select-box";
 import ToggleButton from 'pages/sysMng/ToggleButton';
 
 const CellRender = ({ col, props, handleYnVal, onBtnClick, cellRenderConfig }) => {
-
     const {getCdList, isPrjctIdSelected, setIsPrjctIdSelected, hasError, chgPlaceholder, comboList, cdList,
         expensCd, setExpensCd, setValidationErrors} = cellRenderConfig ?? {};
-    
     if(col.cellType === 'button') {
         return(<Button text={col.button.text} name={col.button.name} type={col.button.type}
             onClick={() => onBtnClick(col.button, props)} />)
@@ -72,6 +70,10 @@ const CellRender = ({ col, props, handleYnVal, onBtnClick, cellRenderConfig }) =
                 }} >
             </TextBox>
         );
-    }
+    } else if (col.cellType === 'html') {
+        return (
+            <div dangerouslySetInnerHTML={{ __html: props.value }}/>
+        );
+    } 
 }
 export default CellRender;
