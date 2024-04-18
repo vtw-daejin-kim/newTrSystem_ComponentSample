@@ -9,22 +9,30 @@ import { exportDataGrid } from "devextreme/excel_exporter";
 import { saveAs } from "file-saver-es";
 
 //====================================
-//  CustomTableSample 샘플 소스
+//  CustomTableSample & SearchInfoSet 샘플 소스
 //  그리드 형식의 기본 조회용 테이블 
 //====================================
 const CustomTableSample = () => {
     //=======================선언구간============================//
+
+    //====================================
+    //  CustomTableSampleJson Json 파일 예시(공통)
+    //  keyColumn       : 조회해오는 데이터의 기준이 되는 컬럼 
+    //  tableColumns    : 그리드의 Column 들을 정의 
+    //  queryId         : back 단에서 조회해오는 쿼리 ID
+    //  searchInfo      : searchInfoSet을 구성하기위한 프로퍼티스 값들을 정의
+    //====================================
     const { keyColumn, queryId, tableColumns, searchInfo, sampleInsertPage } = CustomTableSampleJson;
 
     const navigate = useNavigate();
-    const [param, setParam] = useState({queryId : queryId});
-    const [values, setValues] = useState([]);
+    const [param, setParam] = useState({queryId : queryId});    // 데이터 조회를 위한 파라미터
+    const [values, setValues] = useState([]);                   //그리드를 구성하는 값
 
     //페이징
-    const [totalItems, setTotalItems] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
+    const [totalItems, setTotalItems] = useState(0);    //조회해오는 데이터의 총 개수
+    const [currentPage, setCurrentPage] = useState(1);  //데이터 목록을 조회하는 현재 페이지
+    const [totalPages, setTotalPages] = useState(1);    //조회해오는 데이터의 총 페이지 수 
+    const [pageSize, setPageSize] = useState(10);       //한 페이지에 조회하는 로우 개수
 
     useEffect(() => {
         pageHandle();

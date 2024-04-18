@@ -24,7 +24,7 @@ const CustomEditTableSample = () => {
         pageHandle();
     }, []);
 
-    
+    //목록 조회 이벤트
     const pageHandle = async () => {
         const param = {
             queryId : queryId
@@ -51,12 +51,12 @@ const CustomEditTableSample = () => {
 
             <div>검색된 건 수 : {} 건</div>
                 <CustomEditTable
-                    tbNm={tbNm}
-                    values={values}
-                    keyColumn={keyColumn}
-                    columns={tableColumns}
-                    callback={pageHandle}
-                    paging={true}
+                    tbNm={tbNm}             // 입력, 수정, 삭제에 필요한 테이블 명
+                    values={values}         // DataGrid에 표출되는 데이터 
+                    keyColumn={keyColumn}   // 조회해오는 데이터의 기준이되는 컬럼
+                    columns={tableColumns}  // DataGrid의 제목행의 열 정보가 담긴 값. 필드명과 editType, validation 정보를 포함
+                    callback={pageHandle}   // 그리드내 데이터 변경 시에 콜백 함수
+                    paging={true}           // 페이징 여부
                 />
       </div>
     )
