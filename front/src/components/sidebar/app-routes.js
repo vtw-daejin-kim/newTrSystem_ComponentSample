@@ -44,6 +44,12 @@ const routes = [
     path: "/sample/CustomEditTableSample",
     name: "CustomEditTableSample",
     element: React.lazy(() => import("../../pages/sample/CustomEditTableSample"))
+  },
+  //CustomAddTable 샘플 
+  {
+    path: "/sample/CustomAddTableSample",
+    name: "CustomAddTableSample",
+    element: React.lazy(() => import("../../pages/sample/CustomAddTableSample"))
   }
 ];
 

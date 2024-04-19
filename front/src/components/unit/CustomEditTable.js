@@ -11,9 +11,10 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
 
     const [ cookies ] = useCookies(["userInfo", "userAuth"]);
     const [ cdValList, setCdValList ] = useState({});
-    const empId = cookies.userInfo.empId;
+    //const empId = cookies.userInfo.empId;
+    const empId = '75034125-f287-11ee-9b25-000c2956283f';
     const date = moment();
-
+    
     useEffect(() => { getCdVal(); }, []);
     const getCdVal = useCallback(async () => {
         try{
@@ -55,6 +56,9 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                     : e.data = {...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId}
                     editParam[1] = e.data;
                     editInfo = { url: 'commonInsert', complete: '저장' }
+                    console.log("editInfo", editInfo)
+                    console.log("editParam", editParam)
+                    
                     break;
                 case 'update':
                     if(!doublePk){
@@ -87,8 +91,8 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
 
     const checkDuplicate = (newKeyValue) => {
         let isDuplicate = false;
-        if(newKeyValue !== undefined) isDuplicate = values.some(item => item[keyColumn] === newKeyValue);
-        if(isDuplicate) alert("중복된 키 값입니다. 다른 키 값을 사용해주세요.");
+        //if(newKeyValue !== undefined) isDuplicate = values.some(item => item[keyColumn] === newKeyValue);
+        //if(isDuplicate) alert("중복된 키 값입니다. 다른 키 값을 사용해주세요.");
         return isDuplicate;
     };
 
@@ -103,7 +107,7 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
             />     
         )
     };
-    const rowEventHandlers = ynVal ? { onRowInserting: (e) => onEditRow('insert', e) } : { onRowInserted: (e) => onEditRow('insert', e) };
+    const rowEventHandlers = /* ynVal ? { onRowInserting: (e) => onEditRow('insert', e) } : */ { onRowInserted: (e) => onEditRow('insert', e) };
     
     const highlightRows = keyColumn === 'noticeId' && {onRowPrepared: (e) => {
         if (e.rowType === 'data' && [1, 3].includes(e.data.sgnalOrdr)) {
@@ -155,7 +159,6 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                 {onSelection && <Selection mode="multiple" selectAllMode="page"/>}
                 {columns.map((col) => (
                     <Column
-                     
                         key={col.key}
                         dataField={col.key}
                         caption={col.value}

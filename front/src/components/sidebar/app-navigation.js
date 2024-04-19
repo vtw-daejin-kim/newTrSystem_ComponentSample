@@ -17,6 +17,10 @@ export const navigation = [
       {
         text: 'CustomEditTable Sample',
         path: 'sample/CustomEditTableSample'
+      },
+      {
+        text: 'CustomAddTable Sample',
+        path: 'sample/CustomAddTableSample'
       }
     ]
   }

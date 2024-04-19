@@ -6,6 +6,8 @@
 		     , A.BOARD_ID
      		 , A.BOARD_TTL
      		 , A.BOARD_CN
+     		 , CASE WHEN USE_YN IS NULL THEN 'N'
+     		        ELSE USE_YN END AS USE_YN
      		 , A.REG_EMP_ID
      		 , B.EMP_FLNM
      		 , A.REG_DT AS DT
