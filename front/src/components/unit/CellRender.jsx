@@ -5,8 +5,10 @@ import SelectBox from "devextreme-react/select-box";
 import ToggleButton from 'pages/sysMng/ToggleButton';
 
 const CellRender = ({ col, props, handleYnVal, onBtnClick, cellRenderConfig }) => {
+
     const {getCdList, isPrjctIdSelected, setIsPrjctIdSelected, hasError, chgPlaceholder, comboList, cdList,
         expensCd, setExpensCd, setValidationErrors} = cellRenderConfig ?? {};
+    
     if(col.cellType === 'button') {
         return(<Button text={col.button.text} name={col.button.name} type={col.button.type}
             onClick={() => onBtnClick(col.button, props)} />)
@@ -49,11 +51,11 @@ const CellRender = ({ col, props, handleYnVal, onBtnClick, cellRenderConfig }) =
                 searchEnabled={true}
                 showClearButton={true}
                 showSelectionControls={true}
-                displayExpr='value'
+                displayExpr='displayValue'
                 applyValueMode="useButtons"
                 style={{ backgroundColor: hasError(props.data.cardUseSn, col.key) ? '#FFCCCC' : '' }}
                 onValueChanged={(newValue) => {
-                    props.data[col.key] = newValue.value.map(item => item.key).join(',')
+                    props.data[col.key] = newValue.value
                     setValidationErrors(prevErrors => prevErrors.filter(error => !(error.cardUseSn === props.data.cardUseSn && error.field === col.key)));
                 }}
             />
