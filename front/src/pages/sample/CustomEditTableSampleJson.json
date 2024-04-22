@@ -5,7 +5,12 @@
     "tableColumns" : [
         {"key" : "boardTtl", "value" : "제목", "isRequire" : true},
         {"key" : "regDt", "value" : "작성일자", "isRequire" : true, "type" : "date"},
-        {"key" : "boardCn", "value" : "게시글 내용", "cellType" : "html"}
+        {"key" : "boardCn", "value" : "게시글 내용", "cellType" : "html"},
+        {"key" : "useYn", "value" : "사용 여부", "editType" : "selectBox", "cellType" : "toggle"}
     ],
-    "tbNm": "SAMPLE_BOARD"
+    "tbNm": "SAMPLE_BOARD",
+    "ynVal" : [
+      {"cdValue": "Y", "cdNm": "사용"},
+      {"cdValue": "N", "cdNm": "미사용"}
+    ]
 }

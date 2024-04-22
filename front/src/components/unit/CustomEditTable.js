@@ -1,20 +1,22 @@
 import { Column, DataGrid, Editing, Lookup, MasterDetail, Selection, RequiredRule, StringLengthRule, Pager, Paging, Export } from 'devextreme-react/data-grid';
 import { useCallback, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { Button } from 'devextreme-react';
 import ApiRequest from 'utils/ApiRequest';
 import CellRender from './CellRender';
 import moment from 'moment';
 import '../../pages/sysMng/sysMng.css'
+import uuid from 'react-uuid';
 
-const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal, masterDetail, doublePk, noDataText,
-    noEdit, onSelection, onRowClick, callback, handleData, handleExpanding, cellRenderConfig, onBtnClick, excel, onExcel }) => {
+const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal, masterDetail, doublePk, noDataText, noEdit, 
+    onSelection, onRowClick, callback, handleData, handleExpanding, cellRenderConfig, onBtnClick, excel, onExcel, bulkApply }) => {
 
-    const [ cookies ] = useCookies(["userInfo", "userAuth"]);
+    //const [ cookies ] = useCookies(["userInfo", "userAuth"]);
     const [ cdValList, setCdValList ] = useState({});
+    const empId = "75034125-f287-11ee-9b25-000c2956283f"; 
     //const empId = cookies.userInfo.empId;
-    const empId = '75034125-f287-11ee-9b25-000c2956283f';
     const date = moment();
-    
+
     useEffect(() => { getCdVal(); }, []);
     const getCdVal = useCallback(async () => {
         try{
@@ -52,13 +54,12 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                         isDuplicate = checkDuplicate(e.data[keyColumn]);
                         if (isDuplicate) return;
                     }
-                    handleYnVal !== undefined ? e.data.useYn === undefined && (e.data = {...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId, useYn: "N" })
-                    : e.data = {...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId}
+                    
+                    handleYnVal !== undefined ? (e.data.useYn === undefined ? (e.data = {...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId, useYn: "N" }) : (e.data = {...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId, useYn: e.data.useYn }) ) : (e.data = {...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId})
+                    e.key === undefined ?  e.data = {...e.data, [keyColumn] : uuid()} : e.data = {...e.data, [keyColumn] : keyColumn}; 
                     editParam[1] = e.data;
                     editInfo = { url: 'commonInsert', complete: '저장' }
-                    console.log("editInfo", editInfo)
-                    console.log("editParam", editParam)
-                    
+
                     break;
                 case 'update':
                     if(!doublePk){
@@ -91,8 +92,8 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
 
     const checkDuplicate = (newKeyValue) => {
         let isDuplicate = false;
-        //if(newKeyValue !== undefined) isDuplicate = values.some(item => item[keyColumn] === newKeyValue);
-        //if(isDuplicate) alert("중복된 키 값입니다. 다른 키 값을 사용해주세요.");
+        if(newKeyValue !== undefined) isDuplicate = values.some(item => item[keyColumn] === newKeyValue);
+        if(isDuplicate) alert("중복된 키 값입니다. 다른 키 값을 사용해주세요.");
         return isDuplicate;
     };
 
@@ -107,7 +108,8 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
             />     
         )
     };
-    const rowEventHandlers = /* ynVal ? { onRowInserting: (e) => onEditRow('insert', e) } : */ { onRowInserted: (e) => onEditRow('insert', e) };
+    const otherDateFormat = doublePk && { dateSerializationFormat: "yyyyMMdd" };
+    const rowEventHandlers = ynVal ? { onRowInserting: (e) => { onEditRow('insert', e) }} : { onRowInserted: (e) => { onEditRow('insert', e) }};
     
     const highlightRows = keyColumn === 'noticeId' && {onRowPrepared: (e) => {
         if (e.rowType === 'data' && [1, 3].includes(e.data.sgnalOrdr)) {
@@ -118,7 +120,9 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
     return (
         <div className="wrap_table">
             <DataGrid
-                dateSerializationFormat="yyyyMMdd"
+                {...highlightRows}
+                {...otherDateFormat}
+                {...rowEventHandlers}
                 className='editGridStyle'
                 keyExpr={keyColumn}
                 dataSource={values}
@@ -131,8 +135,6 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                 onRowClick={onRowClick}
                 onExporting={onExcel}
                 onRowExpanding={handleExpanding}
-                {...highlightRows} 
-                {...rowEventHandlers}
                 onSelectionChanged={onSelection && ((e) => onSelection(e))}
                 onRowUpdating={(e) => onEditRow('update', e)}
                 onRowRemoving={(e) => onEditRow('delete', e)}
@@ -167,6 +169,12 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                         width={col.width}
                         alignment={'center'}
                         groupIndex={col.grouping && 0}
+                        // headerCellRender={col.headerBtn && (() => (
+                        //     <div>
+                        //         <span style={{marginRight: '10px'}}>{col.value}</span>
+                        //         <Button text={col.headerBtn.text} onClick={() => bulkApply(values, col)} type='success'/>
+                        //     </div>
+                        // ))}
                         cellRender={col.cellType && ((props) => cellRender(col, props) )} >
                         {col.editType === 'selectBox' ? 
                             <Lookup 
@@ -186,10 +194,7 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                     showPageSizeSelector={true}
                     allowedPageSizes={[20, 50, 80, 100]}
                 />
-                {excel &&
-                    <Export enabled={true} >
-                    </Export>
-                }
+                {excel && <Export enabled={true} />}
             </DataGrid>
         </div>
     );

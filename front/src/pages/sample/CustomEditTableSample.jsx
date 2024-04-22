@@ -11,14 +11,14 @@ import uuid from "react-uuid";
 //====================================
 const CustomEditTableSample = () => {
     //=======================선언구간============================//
-    const [boardData, setBoardData]  = useState([]);
-
-    const [ cookies ] = useCookies(["userInfo", "userAuth"]);
-    const [ cdValList, setCdValList ] = useState({});
-    const empId = "75034125-f287-11ee-9b25-000c2956283f"; 
-
     const [ values, setValues] = useState([]);
-    const { queryId, keyColumn, tableColumns, tbNm } = CustomEditTableSampleJson
+    const { queryId, keyColumn, tableColumns, tbNm, ynVal } = CustomEditTableSampleJson
+
+    //페이징
+    const [totalItems, setTotalItems] = useState(0);    //조회해오는 데이터의 총 개수
+    const [currentPage, setCurrentPage] = useState(1);  //데이터 목록을 조회하는 현재 페이지
+    const [totalPages, setTotalPages] = useState(1);    //조회해오는 데이터의 총 페이지 수 
+    const [pageSize, setPageSize] = useState(10);       //한 페이지에 조회하는 로우 개수
     //==========================================================//
     useEffect(() => {
         pageHandle();
@@ -31,8 +31,29 @@ const CustomEditTableSample = () => {
         }
         try {
             const response = await ApiRequest('/boot/common/queryIdSearch', param)
-            if (response.length !== 0) setValues(response);
+            if (response.length !== 0) {
+                setValues(response);
+                setTotalItems(response[0].totalItems);
+            } else {
+                setTotalItems(0);
+            }
         }catch(error){
+            console.log(error)
+        }
+    }
+
+    //toggle 버튼 yn 값 변경 시 수정 이벤트
+    const handleYnVal = async (e) => {
+        const ynParam = [
+            {tbNm: tbNm},
+            e.data,
+            {boardId : e.key}
+        ]
+
+        try {
+            const response = await ApiRequest('/boot/common/commonUpdate', ynParam);
+            if(response === 1) pageHandle();
+        } catch(error) {
             console.log(error)
         }
     }
@@ -49,14 +70,16 @@ const CustomEditTableSample = () => {
 
             </div>
 
-            <div>검색된 건 수 : {} 건</div>
+            <div>검색된 건 수 : {totalItems} 건</div>
                 <CustomEditTable
-                    tbNm={tbNm}             // 입력, 수정, 삭제에 필요한 테이블 명
-                    values={values}         // DataGrid에 표출되는 데이터 
-                    keyColumn={keyColumn}   // 조회해오는 데이터의 기준이되는 컬럼
-                    columns={tableColumns}  // DataGrid의 제목행의 열 정보가 담긴 값. 필드명과 editType, validation 정보를 포함
-                    callback={pageHandle}   // 그리드내 데이터 변경 시에 콜백 함수
-                    paging={true}           // 페이징 여부
+                    tbNm={tbNm}                 // 입력, 수정, 삭제에 필요한 테이블 명
+                    values={values}             // DataGrid에 표출되는 데이터 
+                    keyColumn={keyColumn}       // 조회해오는 데이터의 기준이되는 컬럼
+                    columns={tableColumns}      // DataGrid의 제목행의 열 정보가 담긴 값. 필드명과 editType, validation 정보를 포함
+                    callback={pageHandle}       // 그리드내 데이터 변경 시에 콜백 함수
+                    paging={true}               // 페이징 여부
+                    ynVal={ynVal}
+                    handleYnVal={handleYnVal}
                 />
       </div>
     )
