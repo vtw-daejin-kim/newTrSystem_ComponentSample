@@ -9,14 +9,14 @@ import { exportDataGrid } from "devextreme/excel_exporter";
 import { saveAs } from "file-saver-es";
 
 //====================================
-//  CustomTableSample & SearchInfoSet 샘플 소스
+//  CustomTable & SearchInfoSet 샘플 소스
 //  그리드 형식의 기본 조회용 테이블 
 //====================================
 const CustomTableSample = () => {
     //=======================선언구간============================//
 
     //====================================
-    //  CustomTableSampleJson Json 파일 예시(공통)
+    //  CustomTable Json 파일 예시
     //  keyColumn       : 조회해오는 데이터의 기준이 되는 컬럼 
     //  tableColumns    : 그리드의 Column 들을 정의 
     //  queryId         : back 단에서 조회해오는 쿼리 ID

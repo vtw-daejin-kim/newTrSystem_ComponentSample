@@ -5,18 +5,32 @@ import CustomHorizontalTable from "components/unit/CustomHorizontalTable";
 import CustomHorizontalTableSampleJson from "./CustomHorizontalTableSampleJson.json";
 import { Button } from "devextreme-react";
 import ApiRequest from 'utils/ApiRequest';
+
+//====================================
+//  CustomHorizontalTable 샘플 소스
+//  세로로 데이터가 표출되는 테이블. 4열 구조(header : data, header: data)
+//====================================
 const CustomHorizontalTableSample = () => {
+    //=======================선언구간============================//
+
+    //====================================
+    //  CustomHorizontalTable Json 파일 예시
+    //  queryId             : back 단에서 조회해오는 쿼리 ID
+    //  boardDetail         : 그리드 내의 헤더 컬럼들을 정의 
+    //  detailButtonGroup   : 상세페이지 버튼 정의     
+    //====================================
+    const { queryId, boardDetail, detailButtonGroup} = CustomHorizontalTableSampleJson;
     const navigate = useNavigate();
     const location = useLocation();
-    const boardId = location.state.id;
-    const [ boardDetailData, setBoardDetailData ] = useState({});
-    const { queryId, boardDetail, detailButtonGroup} = CustomHorizontalTableSampleJson;
-    
+    const boardId = location.state.id;      //useNavigate 로 넘어오는 state 데이터 값
+    const [ boardDetailData, setBoardDetailData ] = useState({});   //back단에서 조회해오는 데이터를 담는 state
     
     useEffect(() => {
         pageHandle();
     },[]);
-    
+    //==========================================================//
+
+    //게시판 상세페이지 조회 이벤트
     const pageHandle = async() => {
         const param = {
             queryId : queryId,
@@ -33,6 +47,7 @@ const CustomHorizontalTableSample = () => {
         }
     }
 
+    //상세페이지 삭제버튼 클릭 시 호출 이벤트
     const deleteBoard = async () => {
         const result = window.confirm("삭제하시겠습니까?")
         if(result){

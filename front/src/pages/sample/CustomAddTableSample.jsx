@@ -5,29 +5,41 @@ import ApiRequest from "utils/ApiRequest";
 import SearchInfoSet from "components/composite/SearchInfoSet";
 import { useNavigate } from "react-router-dom";
 
+//====================================
+//  CustomAddTable & SearchInfoSet 샘플 소스
+//  Datagrid에 버튼 클릭으로 행을 추가하여 내용을 작성할 수 있는 컴포넌트
+//====================================
 const CustomAddTableSample = () =>{
-    const { menuName, queryId, tableColumns, searchInfo, sampleInsertPage} = CustomAddTableSampleJson
+    //=======================선언구간============================//
+
+    //====================================
+    //  CustomAddTable Json 파일 예시
+    //  queryId         : back 단에서 조회해오는 쿼리 ID
+    //  tableColumns    : 그리드의 Column 들을 정의 
+    //  searchInfo      : SearchInfoSet을 구성하기위한 프로퍼티스 값들을 정의
+    //  sampleInsertPage: SearchInfoSet 입력버튼 클릭시 이동하는 insert 페이지
+    //====================================
+    const { queryId, tableColumns, searchInfo, sampleInsertPage} = CustomAddTableSampleJson
 
     const navigate = useNavigate();
     const [values, setValues] = useState([]);
     const [param, setParam] = useState({queryId : queryId});    // 데이터 조회를 위한 파라미터
     
-
-    //페이징
     const [totalItems, setTotalItems] = useState(0);    //조회해오는 데이터의 총 개수
-    const [currentPage, setCurrentPage] = useState(1);  //데이터 목록을 조회하는 현재 페이지
-    const [totalPages, setTotalPages] = useState(1);    //조회해오는 데이터의 총 페이지 수 
-    const [pageSize, setPageSize] = useState(10);       //한 페이지에 조회하는 로우 개수
 
     useEffect(() => {
         pageHandle();
     }, [param])
+    //==========================================================//
 
     //목록 조회 이벤트
     const pageHandle = async() => {
         try{
             const response = await ApiRequest('/boot/common/queryIdSearch', param);
-            if(response.length !== 0) setValues(response);
+            if(response.length !== 0) {
+                setValues(response);
+                setTotalItems(response[0].totalItems);
+            }
         } catch(error){
             console.log(error)
         }
@@ -37,16 +49,12 @@ const CustomAddTableSample = () =>{
     const searchHandle = async (initParam) => {
         setParam({
             ...initParam,
-            queryId: queryId,
-            currentPage: currentPage,
-            startVal: 0,
-            pageSize: pageSize
+            queryId: queryId
         });
     }
 
-    //로우 더블클릭 이벤트 
+    //로우 더블클릭 이벤트 > CustomBudgetTableSample, 유저 상세 페이지 이동
     const onRowDblClick = (data) => {
-        console.log("data : ", data);
         navigate("/sample/CustomBudgetTableSample", {state: {id:data.key}})
     }
     
@@ -68,7 +76,6 @@ const CustomAddTableSample = () =>{
 
             <div>검색된 건 수 : {totalItems} 건</div>
                 <CustomAddTable
-                    menuName = {menuName}
                     columns = {tableColumns}
                     values = {values}
                     json={CustomAddTableSampleJson}

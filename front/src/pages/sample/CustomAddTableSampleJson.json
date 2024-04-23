@@ -15,28 +15,17 @@
     "naviVal" : "/sample/CustomAddTableSample",
     "searchInfo" : {
         "searchParams" : {
-            "insertButton" : true,
-            "dateRange" : true, 
-            "startDyNm" : "startDt",
-            "endDtNm" : "endDt"
+            "insertButton" : true
         },
-        "selectBoxItem" : [
-            {
-                "placeholder": "[전체]",
-                "param":{
-                  "tbNm": "CD",
-                  "valueExpr": "cdValue",
-                  "displayExpr": "cdNm",
-                  "name": "searchCnd",
-                  "condition": {
-                    "upCdValue": "VTW017"
-                  },
-                  "clearButton": true
-                }
-              }
-        ],
         "textBoxItem" : [
-            { "placeholder": "검색어", "name": "searchWrd" }
+            {
+                "placeholder": "사번",
+                "name": "userEmpNo"
+            },
+            {
+                "placeholder": "성명",
+                "name": "userNm"
+            }
         ] 
     },
     "sampleInsertPage" : "/sample/ComponentInsertForm"

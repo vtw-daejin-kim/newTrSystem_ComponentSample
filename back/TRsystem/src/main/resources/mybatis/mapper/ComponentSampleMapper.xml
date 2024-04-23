@@ -62,11 +62,31 @@
 		     , A.USER_TELNO
 		     , A.USER_EML
 		     , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
+		     , COUNT(*) OVER () AS TOTAL_ITEMS
 		  FROM tester.SAMPLE_USER A
+		 WHERE 1=1
+		  <if test="userEmpno != null and userEmpno != ''">
+		   AND A.USER_EMPNO LIKE CONCAT('%',#{userEmpno},'%')
+		  </if>
+		  <if test="userNm != null and userNm != ''">
+		   AND A.USER_NM LIKE CONCAT('%',#{userNm},'%')
+		  </if>
 	</select>
 	
 	<select id="retrieveSampleUserCnt" parameterType="map" resultType="com.trsystem.LowerHashMap">
 		SELECT COUNT(1) AS USER_NO
 		  FROM tester.SAMPLE_USER A
+	</select>
+	
+	<select id="selectSampleUserOne" parameterType="map" resultType="com.trsystem.LowerHashMap">
+		SELECT A.USER_ID
+		     , A.USER_EMPNO
+		     , A.USER_NM
+		     , A.USER_BRDT
+		     , A.USER_TELNO
+		     , A.USER_EML
+		     , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
+		  FROM tester.SAMPLE_USER A
+		 WHERE A.USER_ID = #{userId}
 	</select>
 </mapper>

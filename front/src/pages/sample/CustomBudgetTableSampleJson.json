@@ -1,0 +1,22 @@
+{
+    "menuName" : "CustomBudgetTableSample",
+    "queryId" : "ComponentSampleMapper.selectSampleUserOne",
+    "sampleUserInfo" :
+        {
+            "userInfo1" : [
+                { "key" : "userEmpno", "value" : "사번" },
+                { "key" : "userNm", "value" : "성명" }
+            ],
+            "userInfo2" : [
+                { "key": "userBrdt", "value": "생년월일"  },
+                { "key": "userSexcd", "value": "성별" },
+                { "key": "userTelno", "value": "전화번호" },
+                { "key": "userEml", "value": "이메일" }
+            ]
+        },
+    "detailButtonGroup" : [
+        { "id": 1, "text": "목록", "onClick": "/sample/CustomAddTableSample", "type": "normal" },
+        { "id": 2, "text": "수정", "onClick": "/sample/ComponentInsertForm", "state": { "id": "userId", "editMode": "update" }, "type":"default" },
+        { "id": 3, "text": "삭제", "onClick": "deleteUser", "type":"danger" }
+    ]
+}
