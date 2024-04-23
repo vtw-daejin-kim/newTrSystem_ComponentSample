@@ -33,12 +33,6 @@ const routes = [
     name: "BoardInputFormSample",
     element: React.lazy(() => import("../../pages/sample/BoardInputFormSample"))
   },
-  //컴포넌트 샘플 소스 인서트 보드
-  {
-    path: "/sample/ComponenetSampleInsert",
-    name: "ComponenetSampleInsert",
-    element: React.lazy(() => import("../../pages/sample/ComponenetSampleInsert"))
-  },
   //CustomEditTable 샘플 
   {
     path: "/sample/CustomEditTableSample",
@@ -50,6 +44,18 @@ const routes = [
     path: "/sample/CustomAddTableSample",
     name: "CustomAddTableSample",
     element: React.lazy(() => import("../../pages/sample/CustomAddTableSample"))
+  },
+  //ComponentInsertForm
+  {
+    path: "/sample/ComponentInsertForm",
+    name: "ComponentInsertForm",
+    element: React.lazy(() => import("../../pages/sample/ComponentInsertForm"))
+  },
+  //CustomBudgetTable Sample
+  {
+    path: "/sample/CustomBudgetTableSample",
+    name: "CustomBudgetTableSample",
+    element: React.lazy(() => import("../../pages/sample/CustomBudgetTableSample"))
   }
 ];
 

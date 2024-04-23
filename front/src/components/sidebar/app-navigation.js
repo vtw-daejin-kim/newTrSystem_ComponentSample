@@ -21,6 +21,10 @@ export const navigation = [
       {
         text: 'CustomAddTable Sample',
         path: 'sample/CustomAddTableSample'
+      },
+      {
+        text: 'ComponentInsertForm Sample',
+        path: 'sample/ComponentInsertForm'
       }
     ]
   }

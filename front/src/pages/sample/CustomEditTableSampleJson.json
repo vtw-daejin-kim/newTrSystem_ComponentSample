@@ -12,5 +12,30 @@
     "ynVal" : [
       {"cdValue": "Y", "cdNm": "사용"},
       {"cdValue": "N", "cdNm": "미사용"}
-    ]
+    ],
+    "searchInfo" : {
+      "searchParams" : {
+        "dateRange" : true,
+        "startDtNm" : "startDt",
+        "endDtNm" : "endDt"
+      },
+      "selectBoxItem" : [
+        {
+          "placeholder": "[전체]",
+          "param":{
+            "tbNm": "CD",
+            "valueExpr": "cdValue",
+            "displayExpr": "cdNm",
+            "name": "searchCnd",
+            "condition": {
+              "upCdValue": "VTW017"
+            },
+            "clearButton": true
+          }
+        }
+      ],
+      "textBoxItem" : [
+        { "placeholder": "검색어", "name": "searchWrd" }
+      ]
+    }
 }

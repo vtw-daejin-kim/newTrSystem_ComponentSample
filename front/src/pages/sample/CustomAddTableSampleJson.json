@@ -1,12 +1,43 @@
 {
     "menuName" : "CustomAddTableSample",
-    "queryId" : "ComponentSampleMapper.retrieveSampleBoardList",
-    "tbNm" : "SAMPLE_BOARD",
-    "keyColumn" : "boardId",
+    "queryId" : "ComponentSampleMapper.retrieveSampleUserList",
+    "cntQueryId": "ComponentSampleMapper.retrieveSampleUserCnt",
+    "table" : "SAMPLE_USER",
+    "pkColumns" : "userId",
+    "keyColumn" : "userId",
     "tableColumns" : [
-        { "key": "rownum", "value": "번호", "width": "120", "alignment" : "center" },
-        { "key": "boardTtl", "value": "게시글 제목", "alignment" : "center" },
-        { "key": "empFlnm", "value": "올린사람", "width": "120", "alignment" : "center"  },
-        { "key": "regDt", "value": "등록일시", "width": "120" }
-    ]
+        { "key": "userEmpno", "value": "사번", "width": "150", "alignment" : "center" },
+        { "key": "userNm", "value": "성명", "width": "150", "alignment" : "center" },
+        { "key": "userBrdt", "value": "생년월일", "width": "150", "alignment" : "center" },
+        { "key": "userTelno", "value": "전화번호", "width": "150", "alignment" : "center" },
+        { "key": "userEml", "value": "이메일", "width": "150", "alignment" : "center" }
+    ],
+    "naviVal" : "/sample/CustomAddTableSample",
+    "searchInfo" : {
+        "searchParams" : {
+            "insertButton" : true,
+            "dateRange" : true, 
+            "startDyNm" : "startDt",
+            "endDtNm" : "endDt"
+        },
+        "selectBoxItem" : [
+            {
+                "placeholder": "[전체]",
+                "param":{
+                  "tbNm": "CD",
+                  "valueExpr": "cdValue",
+                  "displayExpr": "cdNm",
+                  "name": "searchCnd",
+                  "condition": {
+                    "upCdValue": "VTW017"
+                  },
+                  "clearButton": true
+                }
+              }
+        ],
+        "textBoxItem" : [
+            { "placeholder": "검색어", "name": "searchWrd" }
+        ] 
+    },
+    "sampleInsertPage" : "/sample/ComponentInsertForm"
 }

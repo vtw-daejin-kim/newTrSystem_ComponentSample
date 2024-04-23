@@ -4,12 +4,18 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import ApiRequest from "utils/ApiRequest";
+import moment from 'moment';
 
-const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOdrTobe, cdValues, ctrtYmd, stbleEndYmd, deptId, targetOdr, bizSttsCd, atrzLnSn }) => {
+const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOdrTobe, cdValues, ctrtYmd, stbleEndYmd, deptId, targetOdr, bizSttsCd, atrzLnSn, onRowDblClick }) => {
   const navigate = useNavigate();
   const [param, setParam] = useState([]);
   const [value, setValue] = useState([]);
   const dataGridRef = useRef(null); // DataGrid 인스턴스에 접근하기 위한 ref
+
+  /* 등록 Id 수정 Id 저장 시 */
+  const empId = "75034125-f287-11ee-9b25-000c2956283f";
+  /* 등록 날짜 수정 날짜 저장 시 */ 
+  const date = moment();
 
   //부모창에서 받아온 데이터를 상태에 담아주는 useEffect
   useEffect(() => {
@@ -17,12 +23,22 @@ const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOd
   }, [values]);
   
   const getNumber = async() => {
-    const paramInfo = {
-      queryId: "projectMapper.retrieveChgPrmpcOdr",
-      prjctId: prjctId,
-      bgtMngOdr: bgtMngOdrTobe,
-      [json.keyColumn] : json.keyColumn
-    };
+
+    let paramInfo;
+
+    if(prjctId !== undefined){
+      paramInfo = {
+        queryId: "projectMapper.retrieveChgPrmpcOdr",
+        prjctId: prjctId,
+        bgtMngOdr: bgtMngOdrTobe,
+        [json.keyColumn] : json.keyColumn
+      };
+    /* Sample 및 다른 경우를 위해 추가 */
+    } else {
+      paramInfo = {
+        queryId: json.cntQueryId 
+      };
+    }
 
     try {
       const response = await ApiRequest("/boot/common/queryIdSearch", paramInfo);
@@ -42,15 +58,26 @@ const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOd
         order = value[json.keyColumn];
       }
       order++
-
+      
       //재료비, 외주업체에서 호출한 경우 차수 추가
       if(json.keyColumn === "matrlCtSn" || json.keyColumn === "outordEntrpsCtPrmpcSn"){ 
         e.data.bgtMngOdr = bgtMngOdrTobe;
       }
-      e.data = {  
-        ...e.data,
-        "prjctId" : prjctId,
-        [json.keyColumn] : order,  
+
+      if(prjctId !== undefined){
+        e.data = {   
+          ...e.data,
+          "prjctId" : prjctId,
+          [json.keyColumn] : order,  
+        }
+      /* Sample 및 다른 경우를 위해 추가 */
+      } else {
+        e.data = {  
+          ...e.data,
+          [json.pkColumns] : e.key,
+          regEmpId : empId,
+          regDt : date.format('YYYY-MM-DD')
+        }
       }
 
       setParam(currentParam => ({
@@ -74,7 +101,6 @@ const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOd
 
 
   const onRowInserting = async() => {
-    
     if(typeof(param.ctrtBgngYmd)==="object"){
       const formatCtrtBgngYmd = formatDate(param.ctrtBgngYmd);
       param.ctrtBgngYmd = formatCtrtBgngYmd;
@@ -102,7 +128,7 @@ const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOd
 
   //데이터 그리드에 로우가 수정될 때마다 실행
   const onRowUpdated = async(e) => {
-
+    console.log("e", e);
     const paramInfo = {...e.data};
 
     if(typeof(paramInfo.ctrtBgngYmd)==="object"){
@@ -137,6 +163,7 @@ const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOd
 
   //데이터 그리드에 로우가 삭제될 때마다 실행
   const onRowRemoved = async(e) => {
+
         const paramInfo = e.data;
         const paramInfoNew = pick(paramInfo, json.pkColumns);
 
@@ -159,26 +186,38 @@ const CustomAddTable = ({ columns, values, pagerVisible, prjctId, json, bgtMngOd
   //배열에서 특정 키만 추출
   const pick = (source, keys) => {
     const result = {};
-    keys.forEach(key => {
-      if (key in source) {
-        result[key] = source[key];
-      }
-    });
+    if(Array.isArray(keys)){
+      keys.forEach(key => {
+        if (key in source) {
+          result[key] = source[key];
+        }
+      });
+    /*PK 가 단일로 구성되어 있는 경우*/
+    } else {
+      
+      result[keys] = source[keys];
+    }
     return result;
   };
 
 const reload = () => {
+  if(prjctId !== undefined){
     navigate("../project/ProjectChange",
-        {
-    state: { prjctId: prjctId, 
-             bgtMngOdrTobe: bgtMngOdrTobe,
-             ctrtYmd: ctrtYmd, 
-             stbleEndYmd: stbleEndYmd,
-             deptId : deptId,  
-             targetOdr : targetOdr,
-             bizSttsCd : bizSttsCd,
-             atrzLnSn : atrzLnSn},
+    {
+      state: { prjctId: prjctId, 
+              bgtMngOdrTobe: bgtMngOdrTobe,
+              ctrtYmd: ctrtYmd, 
+              stbleEndYmd: stbleEndYmd,
+              deptId : deptId,  
+              targetOdr : targetOdr,
+              bizSttsCd : bizSttsCd,
+              atrzLnSn : atrzLnSn},
     })
+    /* Sample 및 다른 경우를 위해 분기 처리 추가 */
+  } else {
+    navigate(json.navlVal);
+  }
+
 };
 
   return (
@@ -203,6 +242,7 @@ const reload = () => {
       onRowInserted={onRowInserted}  
       onRowUpdated={onRowUpdated}  
       onRowRemoved={onRowRemoved}
+      onRowDblClick={onRowDblClick}
     >
       <Editing 
         mode="row"

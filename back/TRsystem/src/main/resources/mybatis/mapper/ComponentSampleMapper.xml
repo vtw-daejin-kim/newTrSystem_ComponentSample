@@ -53,4 +53,20 @@
           WHERE 1=1
             AND A.BOARD_ID = #{boardId} 
 	</select>
+	
+	<select id="retrieveSampleUserList" parameterType="map" resultType="com.trsystem.LowerHashMap"> 
+		SELECT A.USER_ID
+		     , A.USER_EMPNO
+		     , A.USER_NM
+		     , A.USER_BRDT
+		     , A.USER_TELNO
+		     , A.USER_EML
+		     , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
+		  FROM tester.SAMPLE_USER A
+	</select>
+	
+	<select id="retrieveSampleUserCnt" parameterType="map" resultType="com.trsystem.LowerHashMap">
+		SELECT COUNT(1) AS USER_NO
+		  FROM tester.SAMPLE_USER A
+	</select>
 </mapper>
