@@ -4,8 +4,8 @@
     "keyColumn" : "boardId",
     "tableColumns" : [
         {"key" : "boardTtl", "value" : "제목", "isRequire" : true},
-        {"key" : "regDt", "value" : "작성일자", "isRequire" : true, "type" : "date"},
         {"key" : "boardCn", "value" : "게시글 내용", "cellType" : "html"},
+        {"key" : "noticeDt", "value" : "공지일자", "isRequire" : true, "type" : "date"},
         {"key" : "useYn", "value" : "사용 여부", "editType" : "selectBox", "cellType" : "toggle"}
     ],
     "tbNm": "SAMPLE_BOARD",

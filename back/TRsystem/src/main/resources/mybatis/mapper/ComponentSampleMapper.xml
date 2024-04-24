@@ -6,6 +6,7 @@
 		     , A.BOARD_ID
      		 , A.BOARD_TTL
      		 , A.BOARD_CN
+     		 , A.NOTICE_DT
      		 , CASE WHEN USE_YN IS NULL THEN 'N'
      		        ELSE USE_YN END AS USE_YN
      		 , A.REG_EMP_ID
@@ -29,15 +30,16 @@
 			)
 		  </if>
 		  <if test="startDt != null and endDt != null">
-		  	AND A.REG_DT BETWEEN CONCAT(DATE(#{startDt}), ' ', '00:00:00') AND CONCAT(DATE(#{startDt}), ' ', '23:59:59')
+		  	AND A.NOTICE_DT BETWEEN #{startDt} AND #{endDt}
 		  </if>
-		  ORDER BY DT DESC
+		  ORDER BY A.NOTICE_DT DESC
 	</select>
 	
 	<select id="retrieveSampleBoardOne" parameterType="map" resultType="com.trsystem.LowerHashMap"> 
         SELECT A.BOARD_ID
      		 , A.BOARD_TTL
      		 , A.BOARD_CN
+     		 , A.NOTICE_DT
      		 , A.REG_EMP_ID
      		 , B.EMP_FLNM
      		 , A.REG_DT AS DT

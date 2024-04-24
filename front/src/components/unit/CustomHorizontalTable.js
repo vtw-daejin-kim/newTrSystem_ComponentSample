@@ -1,7 +1,6 @@
 import DataGrid, { Column } from 'devextreme-react/data-grid';
 
-const CustomHorizontalTable = ({ headers, column }) => { 
-
+const CustomHorizontalTable = ({ headers, column, format }) => { 
   const data = headers.reduce((result, header, index) => {
     // 홀수 인덱스일 때만 새로운 로우 생성
     //4열 [Header, Column, Header, Column] 구조
@@ -77,7 +76,9 @@ const CustomHorizontalTable = ({ headers, column }) => {
         cellRender={(row) => 
           row.data.cellType === "html" ? htmlRender(row.data.column) : <span>{row.data.column}</span>
         } 
+        format={format}
       />
+      {/* 원본 <Column dataField="column" caption="Column" alignment="center" format={format}/> */}
       <Column dataField="header1" caption="Header1" alignment="center" />
       <Column 
         dataField="column1" 
@@ -86,7 +87,9 @@ const CustomHorizontalTable = ({ headers, column }) => {
         cellRender={(row) => 
           row.data.cellType1 === "html" ? htmlRender(row.data.column1) : <span>{row.data.column1}</span>
         } 
+        format={format}
       />
+      {/* 원본 <Column dataField="column1" caption="Column1" alignment="center" format={format}/> */}
     </DataGrid>
   );
 };

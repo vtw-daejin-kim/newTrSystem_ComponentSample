@@ -1,0 +1,52 @@
+{
+    "menuName" : "ComponentInsertForm",
+    "labelValue" : {
+        "userEmpno" : {
+            "name" : "userEmpno",
+            "type" : "TextBox",
+            "label" : "사번",
+            "required" : true,
+            "placeholder" : "사번"
+        },
+        "userNm" : {
+            "name" : "userNm",
+            "type" : "TextBox",
+            "label" : "성명",
+            "required" : true,
+            "placeholder" : "성명"
+        },
+        "userBrdt" : {
+            "name" : "userBrdt",
+            "type" : "DateBox",
+            "label" : "생년월일",
+            "required" : true,
+            "placeholder" : "생년월일"
+        },
+        "userTelno" : {
+            "name" : "userTelno",
+            "type" : "TextBox",
+            "label" : "전화번호",
+            "required" : true,
+            "placeholder" : "전화번호"
+        },
+        "userEml" : {
+            "name" : "userEml",
+            "type" : "TextBox",
+            "label" : "이메일",
+            "required" : true,
+            "placeholder" : "이메일"
+        }
+    },
+    "cdComboBoxValue" : {
+        "userSexcd" : {
+            "name" : "userSexcd",
+            "required": true,
+            "label": "성별",
+            "placeholder": "성별"
+        }
+    },
+    "dateValue" : {
+
+    }
+    
+}
