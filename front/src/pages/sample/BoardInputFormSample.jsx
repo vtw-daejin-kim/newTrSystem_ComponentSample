@@ -52,7 +52,6 @@ const BoardInputFormSample = () => {
 
         try{
             const response = await ApiRequest("/boot/common/queryIdSearch", param);
-            console.log('response : ', response);
             if(response !== 0) {
                 response[0] = {
                     "noticeTtl" : response[0].boardTtl,
@@ -65,13 +64,13 @@ const BoardInputFormSample = () => {
         }
     }
 
-    //저장 버튼 클릭 이벤트 함수
+    //저장 버튼 클릭 이벤트
     const onClick = () => {
         const result = window.confirm("등록하시겠습니까?");
         if (result) saveData();
     }
 
-    //저장 함수
+    //저장
     const saveData = async () => {
         const formData = new FormData();
         //BoardInputForm 에서 notice(공지사항)과 reference(자료실) 둘만 가능하게 설정되어있으므로 값 재설정 해줌

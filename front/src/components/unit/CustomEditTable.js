@@ -160,7 +160,7 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                 onRowExpanding={handleExpanding}
                 onSelectionChanged={onSelection && ((e) => onSelection(e))}
                 onRowUpdating={(e) => onEditRow('update', e)}
-                onRowRemoving={(e) => onEditRow('delete', e)}
+                onRowRemoved={(e) => onEditRow('delete', e)}
             >
                 {masterDetail &&
                     <MasterDetail
@@ -202,8 +202,7 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                         width={col.width}
                         alignment={'center'}
                         groupIndex={col.grouping && 0}
-                        cellRender={col.cellType && ((props) => cellRender(col, props))}
-                    >
+                        cellRender={col.cellType && ((props) => cellRender(col, props))} >
                         {col.editType === 'selectBox' ?
                             <Lookup
                                 dataSource={cdValList[col.key]}

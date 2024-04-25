@@ -43,7 +43,7 @@ const CustomBudgetTableSample = () => {
         }
         try {
             const response = await ApiRequest("/boot/common/queryIdSearch", param);
-
+            console.log("response : ", response)
             if(response.length !== 0){
                 setValue(response[0])
             }
@@ -84,6 +84,7 @@ const CustomBudgetTableSample = () => {
             <div>
                 <CustomHorizontalTable headers={sampleUserInfo.userInfo1} column={value}/>
                 <CustombudgetTable headers={sampleUserInfo.userInfo2} column={value}/>
+                <CustombudgetTable headers={sampleUserInfo.userInfo3} column={value}/>
             </div>
         </div>
         <div style={{ textAlign: 'center' }}>

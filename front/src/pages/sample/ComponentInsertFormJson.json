@@ -1,5 +1,6 @@
 {
     "menuName" : "ComponentInsertForm",
+    "tbNm" : "SAMPLE_USER",
     "labelValue" : {
         "userEmpno" : {
             "name" : "userEmpno",
@@ -19,7 +20,6 @@
             "name" : "userBrdt",
             "type" : "DateBox",
             "label" : "생년월일",
-            "required" : true,
             "placeholder" : "생년월일"
         },
         "userTelno" : {
@@ -40,13 +40,19 @@
     "cdComboBoxValue" : {
         "userSexcd" : {
             "name" : "userSexcd",
-            "required": true,
             "label": "성별",
             "placeholder": "성별"
         }
     },
     "dateValue" : {
 
+    },
+    "htmlValue" : {
+        "userEtc" : {
+            "dataField" : "userEtc",
+            "name" : "userEtc",
+            "label" : "기타사항",
+            "placeholder" : "내용을 입력하세요"
+        }
     }
-    
 }

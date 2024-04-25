@@ -63,6 +63,8 @@
 		     , A.USER_BRDT
 		     , A.USER_TELNO
 		     , A.USER_EML
+		     , A.USER_SEXCD
+		     , A.USER_ETC
 		     , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 		     , COUNT(*) OVER () AS TOTAL_ITEMS
 		  FROM tester.SAMPLE_USER A
@@ -87,6 +89,8 @@
 		     , A.USER_BRDT
 		     , A.USER_TELNO
 		     , A.USER_EML
+		     , A.USER_SEXCD
+		     , A.USER_ETC
 		     , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
 		  FROM tester.SAMPLE_USER A
 		 WHERE A.USER_ID = #{userId}

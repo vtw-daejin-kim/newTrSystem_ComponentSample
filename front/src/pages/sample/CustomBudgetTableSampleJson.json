@@ -12,6 +12,9 @@
                 { "key": "userSexcd", "value": "성별" },
                 { "key": "userTelno", "value": "전화번호" },
                 { "key": "userEml", "value": "이메일" }
+            ],
+            "userInfo3" : [
+                {"key" : "userEtc", "value" : "기타사항"}
             ]
         },
     "detailButtonGroup" : [
