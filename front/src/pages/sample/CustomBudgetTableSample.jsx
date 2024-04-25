@@ -29,6 +29,7 @@ const CustomBudgetTableSample = () => {
     const location = useLocation();
     const userId = location.state.id;
     const [ value, setValue ] = useState({});
+    const [fileList, setFileList] = useState([]);
 
     useEffect(() => {
         pageHandle();
@@ -43,9 +44,15 @@ const CustomBudgetTableSample = () => {
         }
         try {
             const response = await ApiRequest("/boot/common/queryIdSearch", param);
-            console.log("response : ", response)
             if(response.length !== 0){
                 setValue(response[0])
+                const tmpFileList = response.map((data) => ({
+                    realFileNm : data.realFileNm,
+                    strgFileNm: data.strgFileNm
+                }))
+                if(fileList.length === 0){
+                    setFileList(prevFileList => [...prevFileList, ...tmpFileList]);
+                }
             }
         } catch (error) {
             console.error(error)
@@ -85,6 +92,7 @@ const CustomBudgetTableSample = () => {
                 <CustomHorizontalTable headers={sampleUserInfo.userInfo1} column={value}/>
                 <CustombudgetTable headers={sampleUserInfo.userInfo2} column={value}/>
                 <CustombudgetTable headers={sampleUserInfo.userInfo3} column={value}/>
+                <CustombudgetTable headers={sampleUserInfo.userInfo4} column={value} fileList={fileList}/>
             </div>
         </div>
         <div style={{ textAlign: 'center' }}>

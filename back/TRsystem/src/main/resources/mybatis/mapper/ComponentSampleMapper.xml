@@ -92,7 +92,12 @@
 		     , A.USER_SEXCD
 		     , A.USER_ETC
 		     , DATE_FORMAT(A.REG_DT, '%Y-%m-%d') AS REG_DT
+		     , A.ATCHMNFL_ID
+		     , B.ATCHMNFL_SN
+		     , B.REAL_FILE_NM
+		     , B.STRG_FILE_NM
 		  FROM tester.SAMPLE_USER A
+		  LEFT JOIN tester.ATCHMNFL B ON A.ATCHMNFL_ID = B.ATCHMNFL_ID
 		 WHERE A.USER_ID = #{userId}
 	</select>
 </mapper>

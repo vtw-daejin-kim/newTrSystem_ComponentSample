@@ -14,7 +14,10 @@
                 { "key": "userEml", "value": "이메일" }
             ],
             "userInfo3" : [
-                {"key" : "userEtc", "value" : "기타사항"}
+                {"key" : "userEtc", "value" : "기타사항", "cellType" : "html"}
+            ],
+            "userInfo4" : [
+                {"key" : "atchmnflId", "value" : "첨부파일", "cellType" : "file"}
             ]
         },
     "detailButtonGroup" : [
