@@ -56,7 +56,7 @@ const CustomEditTableSample = () => {
         const ynParam = [
             {tbNm: tbNm},
             e.data,
-            {boardId : e.key}
+            {noticeId : e.key}
         ]
         try {
             const response = await ApiRequest('/boot/common/commonUpdate', ynParam);

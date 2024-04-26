@@ -105,6 +105,35 @@ const BoardInputForm = ({ edit, data, setData, attachments, setAttachments, atta
                                     );
                                 })}
                             </td>
+                            // 샘플예시 떄문에 잠시 새로 생성
+                            ) : column.name ==="date" ? (
+                            <td>
+                                <DateBox
+                                    id={column.dataField}
+                                    value={data.imprtncNtcBgngYmd}
+                                    dateSerializationFormat="yyyyMMdd"
+                                    displayFormat="yyyy-MM-dd"
+                                    type="date"
+                                    onValueChanged={(e) => {
+                                        setData({ ...data, [column.dataField]: e.value });
+                                }}
+                                />
+                            </td>
+                            ) : column.name === "checkBox"? (
+                            <td>
+                                <div className="checkbox-label">
+                                    <CheckBox
+                                        className="checkSpace"
+                                        value={data.useYn === "Y" ? true : false}
+                                        onValueChanged={(e) => {
+                                            setData({ 
+                                                ...data, 
+                                                [column.dataField] : (e.value === true ? "Y" : "N") 
+                                            })
+                                        }}
+                                    />
+                                </div>
+                            </td>
                             ) : column.name === "cn" ? (
                             <td>
                                 <HtmlEditBox

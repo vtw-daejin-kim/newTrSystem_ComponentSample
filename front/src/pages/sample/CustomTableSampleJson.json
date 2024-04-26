@@ -1,13 +1,13 @@
 {
-    "queryId" : "ComponentSampleMapper.retrieveSampleBoardList",
+    "queryId" : "ComponentSampleMapper.retrieveSampleNoticeList",
     "sampleInsertPage" : "/sample/BoardInputFormSample",
-    "keyColumn" : "boardId",
+    "keyColumn" : "noticeId",
     "tableColumns": 
 	[
         { "key": "rownum", "value": "번호", "width": "120", "alignment" : "center" },
-        { "key": "boardTtl", "value": "게시글 제목", "alignment" : "center" },
+        { "key": "noticeTtl", "value": "제목", "alignment" : "center" },
         { "key": "empFlnm", "value": "올린사람", "width": "120", "alignment" : "center"  },
-        { "key": "regDt", "value": "등록일시", "width": "120" },
+        { "key": "imprtncNtcBgngYmd", "value": "공지날짜", "width": "120" },
         { "key": "Button01", "value": "수정", "width": "120", "alignment" : "center", "button" : {"name" : "Button01", "text" : "수정", "able" : "true"} }
 	],
     "searchInfo": {

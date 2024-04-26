@@ -1,6 +1,6 @@
 import DataGrid, { Column } from 'devextreme-react/data-grid';
 
-const CustomHorizontalTable = ({ headers, column, format }) => { 
+const CustomHorizontalTable = ({ headers, column, format, fileList }) => { 
   const data = headers.reduce((result, header, index) => {
     // 홀수 인덱스일 때만 새로운 로우 생성
     //4열 [Header, Column, Header, Column] 구조
@@ -17,10 +17,24 @@ const CustomHorizontalTable = ({ headers, column, format }) => {
     return result;
   }, []);
 
-  const htmlRender = (e) => {
-      return (
-        <div dangerouslySetInnerHTML={{ __html: e }}/>
+  /* 샘플소스 사용때문에 잠시 수정 */
+  const etcCellRender = (type, value) => {
+    if(type === 'html') {
+        return (
+          <div dangerouslySetInnerHTML={{ __html: value }}/>
+        );
+    } else if (type === 'file'){
+      return(
+          fileList.length !== 0 && fileList.filter(file => file.realFileNm !== null && file.realFileNm !== undefined).filter(file => file.realFileNm.endsWith('.txt') || file.realFileNm.endsWith('.jpg') || file.realFileNm.endsWith('.jpeg') || file.realFileNm.endsWith('.png') || file.realFileNm.endsWith('.gif')).map((file, index) => (
+            <div key={index} style={{ textAlign: 'center' }}>
+                <div key={index}>
+                    <a href={`/upload/${file.strgFileNm}`} download={file.realFileNm} style={{ fontSize: '18px', color: 'blue', fontWeight: 'bold' }}>{file.realFileNm}</a>
+                </div>
+            </div>
+          ))
     );
+  }
+
   }
   
   return (
@@ -74,7 +88,7 @@ const CustomHorizontalTable = ({ headers, column, format }) => {
         caption="Column"
         alignment="center"
         cellRender={(row) => 
-          row.data.cellType === "html" ? htmlRender(row.data.column) : <span>{row.data.column}</span>
+          row.data.cellType !== "" ? etcCellRender(row.data.cellType, row.value) : <span>{row.data.column}</span>
         } 
         format={format}
       />
@@ -85,7 +99,7 @@ const CustomHorizontalTable = ({ headers, column, format }) => {
         caption="Column1" 
         alignment="center"
         cellRender={(row) => 
-          row.data.cellType1 === "html" ? htmlRender(row.data.column1) : <span>{row.data.column1}</span>
+          row.data.cellType1 !== "" ? etcCellRender(row.data.cellType1, row.value) : <span>{row.data.column1}</span>
         } 
         format={format}
       />

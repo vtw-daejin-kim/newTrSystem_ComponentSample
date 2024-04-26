@@ -1,7 +1,7 @@
 import DataGrid, { Column } from 'devextreme-react/data-grid';
 
 const CustombudgetTable = ({ headers, column, fileList }) => { 
-    console.log("fileList : ", fileList);
+    console.log("fileList : ", fileList)
     const data = [{
         ...headers.reduce((result, header) => {
           result[header.key] = column?.[header.key] ?? "";

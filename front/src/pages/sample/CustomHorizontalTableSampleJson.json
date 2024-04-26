@@ -1,17 +1,20 @@
 {
     "menuName" : "CustomHorizontalTableSample",
-    "queryId" : "ComponentSampleMapper.retrieveSampleBoardOne",
+    "queryId" : "ComponentSampleMapper.selectSampleNoticeOne",
+    "tbNm" : "NOTICE",
     "boardDetail" : [
-        { "key" : "boardTtl", "value" : "제목"},
+        { "key" : "noticeTtl", "value" : "제목"},
         { "key" : "", "value" : "" },
-        { "key" : "empFlnm", "value" : "작성자" },
-        { "key" : "regDt", "value" : "등록일시" },
-        { "key" : "boardCn", "value" : "내용", "cellType" : "html"},
+        { "key" : "regEmpNm", "value" : "작성자" },
+        { "key" : "regDt", "value" : "게시일자" },
+        { "key" : "noticeCn", "value" : "내용", "cellType" : "html"},
+        { "key" : "", "value" : ""},
+        { "key" : "atchmnflId", "value" : "첨부파일", "cellType" : "file"},
         { "key" : "", "value" : ""}
     ],
     "detailButtonGroup" : [
         { "id": 1, "text": "목록", "onClick": "/sample/CustomTableSample", "type": "normal" },
-        { "id": 2, "text": "수정", "onClick": "/sample/BoardInputFormSample", "state": { "id": "boardId", "editMode": "update" }, "type":"default" },
+        { "id": 2, "text": "수정", "onClick": "/sample/BoardInputFormSample", "state": { "noticeId": "noticeId", "editMode": "update" }, "type":"default" },
         { "id": 3, "text": "삭제", "onClick": "deleteBoard", "type":"danger" }
     ]
 }

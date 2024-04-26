@@ -59,6 +59,7 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                 }
             })
             */
+            console.log("e", e);
             switch (editMode) {
                 case 'insert':
                     if (doublePk !== undefined) {
@@ -74,9 +75,10 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                     ) : e.data = { ...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId }
                     /* key 값을 못가져오는 경우에 대비하여 key 값을 생성 */
                     /* =================   수정 부분   ================= */
+                    
                     e.data[keyColumn] === undefined ? (e.key === undefined ? 
-                        (e.data = {...e.data, [keyColumn] : uuid(), regDt: date.format('YYYY-MM-DD'), regEmpId: empId }) 
-                        : e.data = {...e.data, [keyColumn] : e.key, regDt: date.format('YYYY-MM-DD'), regEmpId: empId }) 
+                        (e.data = {...e.data, [keyColumn] : uuid(), regDt: date.format('YYYY-MM-DD HH:MM:SS'), regEmpId: empId }) 
+                        : e.data = {...e.data, [keyColumn] : e.key, regDt: date.format('YYYY-MM-DD HH:MM:SS'), regEmpId: empId }) 
                     : (e.data = { ...e.data, regDt: date.format('YYYY-MM-DD'), regEmpId: empId});
                     
                     //e.data[keyColumn] === undefined && handleYnVal === undefined ? e.data = {...e.data} : ((e.data.useYn === undefined) ? e.data = {...e.data, useYn : "N"} : e.data = {...e.data});
@@ -130,7 +132,7 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
         )
     };
     const otherDateFormat = doublePk && { dateSerializationFormat: "yyyyMMdd" };
-    const rowEventHandlers = ynVal ? { onRowInserting: (e) => onEditRow('insert', e) } : { onRowInserted: (e) => onEditRow('insert', e) };
+    const rowEventHandlers = ynVal ? { onRowInserting: (e) => onEditRow('insert', e) } : { onRowInserted: (e) =>  onEditRow('insert', e)};
 
     const highlightRows = keyColumn === 'noticeId' && {
         onRowPrepared: (e) => {
@@ -185,7 +187,7 @@ const CustomEditTable = ({ keyColumn, columns, values, tbNm, handleYnVal, ynVal,
                                 if (item.dataField === "upCdValue") item.visible = false;
                                 /* Date Type 날짜 포맷 변환 */
                                 /* =================   수정 부분   ================= */
-                                if (item.column.dataType === "date") item.editorOptions = {displayFormat: 'yyyy.MM.dd'};
+                                if (item.column.dataType === "date") item.editorOptions = {displayFormat: 'yyyy-MM-dd'};
                                 /* ================================================ */
                             }
                         }}

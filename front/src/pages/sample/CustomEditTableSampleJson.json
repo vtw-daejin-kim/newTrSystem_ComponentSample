@@ -1,14 +1,14 @@
 {
     "menuName" : "CustomEditTableSample",
-    "queryId" : "ComponentSampleMapper.retrieveSampleBoardList",
-    "keyColumn" : "boardId",
+    "queryId" : "ComponentSampleMapper.retrieveSampleNoticeList",
+    "keyColumn" : "noticeId",
     "tableColumns" : [
-        {"key" : "boardTtl", "value" : "제목", "isRequire" : true},
-        {"key" : "boardCn", "value" : "게시글 내용", "cellType" : "html"},
-        {"key" : "noticeDt", "value" : "공지일자", "isRequire" : true, "type" : "date"},
+        {"key" : "noticeTtl", "value" : "제목", "isRequire" : true},
+        {"key" : "noticeCn", "value" : "게시글 내용", "cellType" : "html"},
+        {"key" : "imprtncNtcBgngYmd", "value" : "공지일자", "type" : "date", "isRequire" : true},
         {"key" : "useYn", "value" : "사용 여부", "editType" : "selectBox", "cellType" : "toggle"}
     ],
-    "tbNm": "SAMPLE_BOARD",
+    "tbNm": "NOTICE",
     "ynVal" : [
       {"cdValue": "Y", "cdNm": "사용"},
       {"cdValue": "N", "cdNm": "미사용"}

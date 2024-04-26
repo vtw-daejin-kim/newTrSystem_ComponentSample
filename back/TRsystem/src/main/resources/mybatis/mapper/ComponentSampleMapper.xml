@@ -1,6 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.trsystem.mybatis.mapper.ComponentSampleMapper">
+	<select id="retrieveSampleNoticeList" parameterType="map" resultType="com.trsystem.LowerHashMap">
+	   SELECT ROW_NUMBER() OVER() ROWNUM
+			, N.NOTICE_ID
+			, N.NOTICE_TTL
+			, N.NOTICE_CN
+     		 , CASE WHEN N.USE_YN IS NULL THEN 'N'
+     		        ELSE N.USE_YN END AS USE_YN
+			, N.IMPRTNC_NTC_BGNG_YMD
+			, E.EMP_FLNM AS REG_EMP_ID
+			, E.EMP_FLNM
+			, DATE_FORMAT(N.REG_DT, '%Y-%m-%d %H:%i') AS REG_DT
+			, COUNT(*) OVER () AS TOTAL_ITEMS
+		FROM tester.NOTICE N
+		LEFT JOIN EMP E ON N.REG_EMP_ID = E.EMP_ID
+				WHERE 1=1
+		<if test="searchCnd == 'VTW01701' and searchWrd != null">
+			AND N.NOTICE_TTL LIKE CONCAT('%',#{searchWrd},'%')
+		</if>
+		<if test="searchCnd == 'VTW01702' and searchWrd != null">
+			AND REGEXP_REPLACE(N.NOTICE_CN, '&lt;[^&gt;]*&gt;', '') LIKE CONCAT('%', #{searchWrd}, '%')
+		</if>
+		<if test="(searchCnd == null and searchWrd != null) or (searchCnd == 'VTW01703' and searchWrd != null)">
+			AND (
+			N.NOTICE_TTL LIKE CONCAT('%',#{searchWrd},'%')
+			OR REGEXP_REPLACE(N.NOTICE_CN, '&lt;[^&gt;]*&gt;', '') LIKE CONCAT('%', #{searchWrd}, '%')
+			)
+		</if>
+		<if test="startDt != null and endDt != null">
+		  	AND N.IMPRTNC_NTC_BGNG_YMD BETWEEN #{startDt} AND #{endDt}
+		 </if>
+		ORDER BY N.REG_DT DESC
+	</select>
+	
+	<select id="selectSampleNoticeOne" parameterType="map" resultType="com.trsystem.LowerHashMap"> 
+	   SELECT N.NOTICE_ID
+			, N.NOTICE_TTL
+			, N.NOTICE_CN
+			, N.USE_YN
+			, N.IMPRTNC_NTC_BGNG_YMD
+			, N.ATCHMNFL_ID
+			, A.ATCHMNFL_SN
+			, A.REAL_FILE_NM
+			, A.STRG_FILE_NM
+			, E.EMP_FLNM AS REG_EMP_NM
+			, N.REG_EMP_ID
+			, DATE_FORMAT(N.REG_DT, '%Y-%m-%d %H:%i') AS REG_DT
+		FROM NOTICE N
+				 LEFT JOIN EMP E ON N.REG_EMP_ID = E.EMP_ID
+				 LEFT JOIN ATCHMNFL A ON N.ATCHMNFL_ID = A.ATCHMNFL_ID
+		WHERE N.NOTICE_ID = #{noticeId}
+	</select>
+	
 	<select id="retrieveSampleBoardList" parameterType="map" resultType="com.trsystem.LowerHashMap">
 		SELECT ROW_NUMBER() OVER () ROWNUM
 		     , A.BOARD_ID

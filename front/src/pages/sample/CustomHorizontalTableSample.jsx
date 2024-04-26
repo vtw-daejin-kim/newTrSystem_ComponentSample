@@ -19,11 +19,12 @@ const CustomHorizontalTableSample = () => {
     //  boardDetail         : 그리드 내의 헤더 컬럼들을 정의 
     //  detailButtonGroup   : 상세페이지 버튼 정의     
     //====================================
-    const { queryId, boardDetail, detailButtonGroup} = CustomHorizontalTableSampleJson;
+    const { queryId, tbNm, boardDetail, detailButtonGroup} = CustomHorizontalTableSampleJson;
     const navigate = useNavigate();
     const location = useLocation();
-    const boardId = location.state.id;      //useNavigate 로 넘어오는 state 데이터 값
+    const noticeId = location.state.noticeId;      //useNavigate 로 넘어오는 state 데이터 값
     const [ boardDetailData, setBoardDetailData ] = useState({});   //back단에서 조회해오는 데이터를 담는 state
+    const [fileList, setFileList] = useState([]);
     
     useEffect(() => {
         pageHandle();
@@ -34,13 +35,19 @@ const CustomHorizontalTableSample = () => {
     const pageHandle = async() => {
         const param = {
             queryId : queryId,
-            boardId : boardId
+            noticeId : noticeId
         }
         try{
             const response = await ApiRequest("/boot/common/queryIdSearch", param);
-
             if(response.length !== 0){
                 setBoardDetailData(response[0]);
+                const tmpFileList = response.map((data) => ({
+                    realFileNm : data.realFileNm,
+                    strgFileNm : data.strgFileNm
+                }))
+                if(fileList.length === 0){
+                    setFileList(prevFileList => [...prevFileList, ...tmpFileList]);
+                }
             }
         } catch(error) {
             console.log(error)
@@ -52,12 +59,12 @@ const CustomHorizontalTableSample = () => {
         const result = window.confirm("삭제하시겠습니까?")
         if(result){
            const params = [
-                { tbNm : "SAMPLE_BOARD" }, 
-                { boardId : boardId } 
+                { tbNm : tbNm }, 
+                { noticeId : noticeId } 
            ]
 
            try{
-            //"/boot/common/deleteWithFile" 첨부파일 함께 삭제
+            //"/boot/common/deleteWithFile" 첨부파일 함께 삭제 -> 이거로 수정 예정
             const response = await ApiRequest("/boot/common/commonDelete", params)
 
             if(response >= 1){
@@ -78,7 +85,7 @@ const CustomHorizontalTableSample = () => {
                     <h1 style={{ fontSize: "40px" }}>CustomHorizontalTable Sample</h1>
                 </div>
                 <div>
-                    <CustomHorizontalTable headers={boardDetail} column={boardDetailData}/>
+                    <CustomHorizontalTable headers={boardDetail} column={boardDetailData} fileList={fileList}/>
                 </div>
             </div>
             <div style={{ textAlign: 'center' }}> 
@@ -89,7 +96,7 @@ const CustomHorizontalTableSample = () => {
                             text={button.text}
                             type={button.type}
                             onClick={button.onClick === "deleteBoard" ? deleteBoard : () =>
-                                navigate(button.onClick, { state: button.state ? { ...button.state, boardId : boardId } : undefined })}
+                                navigate(button.onClick, { state: button.state ? { ...button.state, noticeId : noticeId } : undefined })}
                         />
                     ))}
             </div>

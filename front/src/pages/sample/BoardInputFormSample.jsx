@@ -20,21 +20,24 @@ const BoardInputFormSample = () => {
     const location = useLocation();
 
     const editMode = location.state.editMode;
-    const boardId = location.state.boardId;
+    const noticeId = location.state.noticeId;
 
     const empId = "75034125-f287-11ee-9b25-000c2956283f";
     const date = moment();
 
-    const { edit, queryId } = BoardInputFormSampleJson;     
+    const { edit, queryId, tbNm } = BoardInputFormSampleJson;     
 
-    const [atchmnFl, setAtchmnFl] = useState([]);           //등록 첨부파일
-    const [newAtchmnFl, setNewAtchmnFl] = useState([]);     //수정시에 기존 파일을 보여주기 위한 객체
-    const [deleteFiles, setDeleteFiles] = useState([{}]);   //수정시에 첨부파일 개별삭제에 필요한 함수
-    
+    const [attachments, setAttachments] = useState([]);                     //등록 첨부파일
+    const [newAtchmnFl, setNewAtchmnFl] = useState([]);                     //수정시에 기존 파일을 보여주기 위한 객체
+    const [deleteFiles, setDeleteFiles] = useState([{tbNm: "ATCHMNFL"}]);   //수정시에 첨부파일 개별삭제에 필요한 함수
+    const [newAttachments, setNewAttachments] = useState(attachments);
     const [ data, setData ] = useState({
-        boardId : uuid(),
+        noticeId : uuid(),
         regEmpId: empId, 
         regDt : date.format('YYYY-MM-DD HH:mm:ss')
+    });
+    const [typeChk, setTypeChk] = useState({
+        useYn : data.useYn === "Y" ? true : false
     });
     //===========================================================//
 
@@ -47,21 +50,29 @@ const BoardInputFormSample = () => {
     const selectData = async() => {
         const param = {
             queryId : queryId,
-            boardId : boardId
+            noticeId : noticeId
         }
 
         try{
             const response = await ApiRequest("/boot/common/queryIdSearch", param);
             if(response !== 0) {
-                response[0] = {
-                    "noticeTtl" : response[0].boardTtl,
-                    "noticeCn" : response[0].boardCn
-                }
-                setData(response[0]);
+                const { atchmnflSn, realFileNm, strgFileNm, regDt, regEmpNm, ...resData } = response[0];
+                setData({ ...resData });
+                const tmpFileList = response.map((data) => ({
+                    realFileNm: data.realFileNm,
+                    strgFileNm: data.strgFileNm,
+                    atchmnflSn: data.atchmnflSn
+                }));
+                setAttachments(tmpFileList);
             }
         } catch (error) {
             console.log(error)
         }
+    }
+
+    const attachFileDelete = (deleteItem) => {
+        setDeleteFiles([...deleteFiles, { atchmnflId: data.atchmnflId ,atchmnflSn: deleteItem.atchmnflSn, strgFileNm: deleteItem.strgFileNm }]);
+        setNewAttachments(newAttachments.filter(item => item !== deleteItem));
     }
 
     //저장 버튼 클릭 이벤트
@@ -73,28 +84,20 @@ const BoardInputFormSample = () => {
     //저장
     const saveData = async () => {
         const formData = new FormData();
-        //BoardInputForm 에서 notice(공지사항)과 reference(자료실) 둘만 가능하게 설정되어있으므로 값 재설정 해줌
-        let saveData = {
-            ...data,
-            "boardTtl" : data.noticeTtl,
-            "boardCn" : data.noticeCn,
-            "atchmnflId" : data.atchmnflId
-        }
-
-        delete saveData.noticeTtl;
-        delete saveData.noticeCn;
 
         //수정시 데이터 설정
         if(editMode === 'update') {
-            saveData = {...saveData, "mdfcnEmpId" : empId, "mdfcnDt" : date.format('YYYY-MM-DD HH:mm:ss')}
-            formData.append("idColumn", JSON.stringify({boardId : data.boardId}));
+            delete data.noticeId;
+            setData({...data, "mdfcnEmpId" : empId, "mdfcnDt" : date.format('YYYY-MM-DD HH:mm:ss')})
+            formData.append("idColumn", JSON.stringify({noticeId : noticeId}));
             formData.append("deleteFiles", JSON.stringify(deleteFiles));
-        } 
+        } else {
+            setData({...data})
+        }
 
-        formData.append("tbNm", JSON.stringify({tbNm: "SAMPLE_BOARD"}));
-        formData.append("data", JSON.stringify(saveData));
-
-        Object.values(atchmnFl).forEach((atchmnFl) => formData.append("attachments", atchmnFl));
+        formData.append("tbNm", JSON.stringify({tbNm: tbNm}));
+        formData.append("data", JSON.stringify(data));
+        Object.values(attachments).forEach((attachments) => formData.append("attachments", attachments));
 
         try{
             // /boot/common/insertlongText : 첨부파일 포함 insert/update 
@@ -119,14 +122,17 @@ const BoardInputFormSample = () => {
                 <h1 style={{ fontSize: "40px" }}>BoardInputForm Sample</h1>
             </div>
             <BoardInputForm
-                edit={edit}                         //입력 항목에 대한 정보를 포함
-                data={data}                         //입력 form 객체
-                editMode={editMode}                 //등록과 수정을 구별하는 값
-                setData={setData}                   //입력된 내용을 담기위한 setState
-                attachments={atchmnFl}              //첨부파일 객체
-                setAttachments={setAtchmnFl}        //첨부된 파일을 담기위한 setState
-                newAttachments={newAtchmnFl}        //수정 시에 기존파일을 보여주기 위한 객체
-                setNewAttachments={setNewAtchmnFl}  //수정시에 기존파일을 옮겨 담는 setState
+                edit={edit}                             //입력 항목에 대한 정보를 포함
+                data={data}                             //입력 form 객체
+                editMode={editMode}                     //등록과 수정을 구별하는 값
+                setData={setData}                       //입력된 내용을 담기위한 setState
+                attachments={attachments}               //첨부파일 객체
+                setAttachments={setAttachments}         //첨부된 파일을 담기위한 setState
+                newAttachments={newAtchmnFl}            //수정 시에 기존파일을 보여주기 위한 객체
+                setNewAttachments={setNewAtchmnFl}      //수정시에 기존파일을 옮겨 담는 setState
+                attachFileDelete={attachFileDelete}
+                typeChk={typeChk}
+                setTypeChk={setTypeChk}
             />
             <div className="wrap_btns inputFormBtn">
                 <Button text="목록" onClick={() => navigate("/sample/CustomTableSample")} />

@@ -57,6 +57,7 @@ const CustomTableSample = () => {
 
     //서치인포셋 조회 이벤트
     const searchHandle = async (initParam) => {
+        console.log("initParam", initParam);
         setParam({
             ...initParam,
             queryId: queryId,
@@ -68,7 +69,7 @@ const CustomTableSample = () => {
     
     //로우 더블클릭 이벤트
     const onRowDblClick = (data) => {
-        navigate("/sample/CustomHorizontalTableSample", {state: {id:data.key}})
+        navigate("/sample/CustomHorizontalTableSample", {state: {noticeId : data.key}})
     }
 
     //엑셀다운로드
