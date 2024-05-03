@@ -25,6 +25,10 @@ export const navigation = [
       {
         text: 'ComponentInsertForm Sample',
         path: 'sample/ComponentInsertForm'
+      },
+      {
+        text: 'CustomPivotGrid Sample',
+        path: 'sample/CustomPivotGridSample'
       }
     ]
   }

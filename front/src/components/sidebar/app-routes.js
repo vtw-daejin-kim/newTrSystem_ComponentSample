@@ -56,6 +56,12 @@ const routes = [
     path: "/sample/CustomBudgetTableSample",
     name: "CustomBudgetTableSample",
     element: React.lazy(() => import("../../pages/sample/CustomBudgetTableSample"))
+  },
+  //CustomPivotGrid Sample
+  {
+    path: "/sample/CustomPivotGridSample",
+    name: "CustomPivotGridSample",
+    element: React.lazy(() => import("../../pages/sample/CustomPivotGridSample"))
   }
 ];
 
