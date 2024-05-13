@@ -97,9 +97,7 @@ const CustomTableSample = () => {
             <div className="title p-1" style={{ marginTop: "20px", marginBottom: "10px" }}>
                 <h1 style={{ fontSize: "40px" }}>CustomTable & SearchInfoSet Sample</h1>
             </div>
-            <div className="col-md-10 mx-auto" style={{ marginBottom: "10px" }}>
-                <span> Component Sample </span>
-            </div>
+            <div className="col-md-10 mx-auto" style={{ marginBottom: "10px" }}/>
             <div style={{ marginBottom: "20px" }}>
                 <SearchInfoSet
                     props={searchInfo}
